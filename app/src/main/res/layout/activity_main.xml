@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_todo"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -17,14 +17,15 @@
         android:text="@string/todo"
         android:textSize="50dp"
         android:background="@color/darkYellow"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        android:onClick="onClick"
+        app:layout_constraintBottom_toTopOf="@+id/button_training"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button_training"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -33,14 +34,15 @@
         android:text="@string/training"
         android:textSize="50dp"
         android:background="@color/darkRed"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
+        android:onClick="onClick"
+        app:layout_constraintBottom_toTopOf="@+id/button_plan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/button_todo" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/button_plan"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -49,14 +51,15 @@
         android:text="@string/week_plan"
         android:textSize="50dp"
         android:background="@color/darkGreen"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
+        android:onClick="onClick"
+        app:layout_constraintBottom_toTopOf="@+id/button_dot"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/button_training" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/button_dot"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -66,9 +69,10 @@
         android:text="@string/dot"
         android:textSize="50dp"
         android:background="@color/darkBlue"
+        android:onClick="onClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
+        app:layout_constraintTop_toBottomOf="@+id/button_plan" />
 </androidx.constraintlayout.widget.ConstraintLayout>
