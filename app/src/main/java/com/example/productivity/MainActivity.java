@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent_training);
                 break;
             case R.id.button_plan:
-                Intent intent_plan = new Intent(this, ToDoActivity.class);
+                Intent intent_plan = new Intent(this, WeekPlanActivity.class);
                 startActivity(intent_plan);
                 break;
             case R.id.button_dot:

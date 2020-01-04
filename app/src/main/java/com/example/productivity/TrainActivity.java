@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 
 public class TrainActivity extends AppCompatActivity {
 
@@ -18,6 +20,7 @@ public class TrainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_train);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle(R.string.training);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -28,6 +31,9 @@ public class TrainActivity extends AppCompatActivity {
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        ListView trainingList = findViewById(R.id.training_list);
+        //trainingList.addView(new TrainingView(this));
     }
 
 }

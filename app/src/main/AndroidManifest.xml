@@ -11,6 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".WeekPlanActivity"></activity>
         <activity
             android:name=".TrainActivity"
             android:label="@string/title_activity_train"
@@ -20,7 +21,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.productivity.MainActivity" />
         </activity>
-        <activity android:name=".ToDoActivity"
+        <activity
+            android:name=".ToDoActivity"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
