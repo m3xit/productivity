@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#333333</color>
     <color name="colorAccent">#D81B60</color>
     <color name="darkBackground">#333333</color>
-    <color name="slightlyLighterBackground">#444444</color>
+    <color name="lighterBackground">#888888</color>
     <color name="darkYellow">#9A9B42</color>
     <color name="darkGreen">#3E8A46</color>
     <color name="darkBlue">#356986</color>
