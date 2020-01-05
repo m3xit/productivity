@@ -2,6 +2,7 @@ package com.example.productivity;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.text.*;
 
 public class Training {
     private String name;
@@ -24,8 +25,9 @@ public class Training {
         return type;
     }
 
-    public Date getDate() {
-        return date;
+    public String getDate() {
+        SimpleDateFormat ft = new SimpleDateFormat ("dd.MM.yyyy");
+        return ft.format(date);
     }
 
     public int getDuration() {

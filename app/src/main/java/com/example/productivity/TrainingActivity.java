@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -29,14 +30,19 @@ public class TrainingActivity extends AppCompatActivity implements TrainingListA
 
         List<Training> trainings = new ArrayList<>();
 
-        for (int i = 0; i < 10; i ++) {
-            if (i % 2 == 1) {
-                trainings.add(new Training("Training " + i, TrainingType.CARDIO));
-            } else {
-                trainings.add(new Training("Training " + i, TrainingType.GYM));
-            }
-
-        }
+        trainings.add(new Training("Pull", TrainingType.GYM));
+        trainings.add(new Training("Push", TrainingType.GYM));
+        trainings.add(new Training("Beine", TrainingType.GYM));
+        trainings.add(new Training("Joggen", TrainingType.CARDIO));
+        trainings.add(new Training("Pull", TrainingType.GYM));
+        trainings.add(new Training("Push", TrainingType.GYM));
+        trainings.add(new Training("Beine", TrainingType.GYM));
+        trainings.add(new Training("Joggen Alena", TrainingType.CARDIO));
+        trainings.add(new Training("Joggen", TrainingType.CARDIO));
+        trainings.add(new Training("Pull", TrainingType.GYM));
+        trainings.add(new Training("Push", TrainingType.GYM));
+        trainings.add(new Training("Beine", TrainingType.GYM));
+        trainings.add(new Training("Joggen", TrainingType.CARDIO));
 
         RecyclerView recyclerView = findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
