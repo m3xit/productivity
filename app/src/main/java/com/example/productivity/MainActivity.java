@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent_todo);
                 break;
             case R.id.button_training:
-                Intent intent_training = new Intent(this, TrainingActivity.class);
+                Intent intent_training = new Intent(this, TrainingListActivity.class);
                 startActivity(intent_training);
                 break;
             case R.id.button_plan:

@@ -11,9 +11,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".TrainingActivity"
-            android:parentActivityName=".MainActivity"></activity>
-        <activity android:name=".WeekPlanActivity"
+        <activity android:name=".TrainingDetailsActivity"></activity>
+        <activity android:name=".NewTrainingActivity" />
+        <activity
+            android:name=".TrainingListActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".WeekPlanActivity"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ToDoActivity"
