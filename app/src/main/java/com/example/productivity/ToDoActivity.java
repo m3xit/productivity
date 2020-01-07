@@ -21,7 +21,7 @@ public class ToDoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_to_do);
 
         SharedPreferences settings = getApplicationContext().getSharedPreferences(key, 0);
-        String todoString = settings.getString(key, null);
+        String todoString = settings.getString(key, "");
 
         todoText = findViewById(R.id.todo_text);
         String input = "";

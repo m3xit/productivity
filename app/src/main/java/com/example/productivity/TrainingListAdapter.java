@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -67,14 +68,12 @@ public class TrainingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
-    // total number of rows
     @Override
     public int getItemCount() {
         return trainings.size();
     }
 
-    // stores and recycles views as they are scrolled off screen
-    public class GymViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class GymViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         TextView title;
         TextView date;
         TextView duration;
@@ -85,16 +84,24 @@ public class TrainingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             date = itemView.findViewById(R.id.training_date);
             duration = itemView.findViewById(R.id.training_duration);
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
         }
+
+        @Override
+        public boolean onLongClick(View view) {
+            trainings.remove(getAdapterPosition());
+            notifyItemRemoved(getAdapterPosition());
+            notifyItemRangeChanged(getAdapterPosition(), trainings.size());
+            return true;
+        }
     }
 
-    // stores and recycles views as they are scrolled off screen
-    public class CardioViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class CardioViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         TextView title;
         TextView date;
         TextView duration;
@@ -105,16 +112,24 @@ public class TrainingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             date = itemView.findViewById(R.id.training_date);
             duration = itemView.findViewById(R.id.training_duration);
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
         }
+
+        @Override
+        public boolean onLongClick(View view) {
+            trainings.remove(getAdapterPosition());
+            notifyItemRemoved(getAdapterPosition());
+            notifyItemRangeChanged(getAdapterPosition(), trainings.size());
+            return true;
+        }
     }
 
-    // stores and recycles views as they are scrolled off screen
-    public class ClimbingViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ClimbingViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         TextView title;
         TextView date;
         TextView duration;
@@ -127,25 +142,31 @@ public class TrainingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             date = itemView.findViewById(R.id.training_date);
             duration = itemView.findViewById(R.id.training_duration);
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
         }
+
+        @Override
+        public boolean onLongClick(View view) {
+            trainings.remove(getAdapterPosition());
+            notifyItemRemoved(getAdapterPosition());
+            notifyItemRangeChanged(getAdapterPosition(), trainings.size());
+            return true;
+        }
     }
 
-    // convenience method for getting data at click position
     Training getItem(int id) {
         return trainings.get(id);
     }
 
-    // allows clicks events to be caught
     void setClickListener(ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 
-    // parent activity will implement this method to respond to click events
     public interface ItemClickListener {
         void onItemClick(View view, int position);
     }

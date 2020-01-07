@@ -29,9 +29,9 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent_plan = new Intent(this, WeekPlanActivity.class);
                 startActivity(intent_plan);
                 break;
-            case R.id.button_dot:
-                Intent intent_dot = new Intent(this, ToDoActivity.class);
-                startActivity(intent_dot);
+            case R.id.button_pomodoro:
+                Intent intent_pomodoro = new Intent(this, TimerActivity.class);
+                startActivity(intent_pomodoro);
                 break;
         }
     }

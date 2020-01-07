@@ -37,7 +37,7 @@ public class TrainingDetailsActivity extends AppCompatActivity implements Exerci
 
         exercises = training.getExercises();
 
-        titleView = findViewById(R.id.textView);
+        titleView = findViewById(R.id.statistics);
         setTitle();
 
         recyclerView = findViewById(R.id.exerciseList);

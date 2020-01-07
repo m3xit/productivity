@@ -3,6 +3,6 @@
     <string name="todo">ToDo...</string>
     <string name="training">Training</string>
     <string name="week_plan">Week Plan</string>
-    <string name="dot">...</string>
+    <string name="pomodoro_timer">Pomodoro</string>
     <string name="title_activity_train">TrainActivity</string>
 </resources>

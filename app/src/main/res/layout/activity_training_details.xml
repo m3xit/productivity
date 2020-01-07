@@ -8,7 +8,7 @@
     tools:context=".TrainingDetailsActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/statistics"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="10dp"
         app:layout_constraintBottom_toTopOf="@+id/exerciseList"
-        app:layout_constraintTop_toBottomOf="@+id/textView"/>
+        app:layout_constraintTop_toBottomOf="@+id/statistics"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/exerciseList"
