@@ -11,15 +11,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".NewAppointmentActivity"></activity>
         <activity
             android:name=".TimerActivity"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".TrainingDetailsActivity"
-            android:parentActivityName=".TrainingListActivity"/>
+            android:parentActivityName=".TrainingListActivity" />
         <activity
             android:name=".NewTrainingActivity"
-            android:parentActivityName=".TrainingListActivity"/>
+            android:parentActivityName=".TrainingListActivity" />
         <activity
             android:name=".TrainingListActivity"
             android:parentActivityName=".MainActivity" />

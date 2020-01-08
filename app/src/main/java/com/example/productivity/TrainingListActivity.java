@@ -41,11 +41,8 @@ public class TrainingListActivity extends AppCompatActivity implements TrainingL
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), NewTrainingActivity.class);
                 startActivityForResult(intent, requestCodeNewTraining);
-
-
             }
         });
-
 
         trainings = new ArrayList<>();
 
