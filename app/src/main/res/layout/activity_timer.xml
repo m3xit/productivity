@@ -25,14 +25,14 @@
             android:layout_gravity="center"
             android:padding="5dp"
             android:text="Pomodoro Timer"
-            android:textSize="30dp" />
+            android:textSize="@dimen/text_title" />
 
         <TextView
             android:id="@+id/statistics"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:textSize="20dp"/>
+            android:textSize="@dimen/text_body"/>
 
         <LinearLayout
             android:id="@+id/linear"
@@ -53,7 +53,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/pomodoroText"
                     android:gravity="center"
-                    android:textSize="20dp"/>
+                    android:textSize="@dimen/text_body"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -94,7 +94,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/pauseText"
                     android:gravity="center"
-                    android:textSize="20dp"/>
+                    android:textSize="@dimen/text_body"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -141,7 +141,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30dp"
+            android:textSize="@dimen/text_title"
             android:text="Timer"
             android:layout_gravity="center"/>
 
@@ -225,7 +225,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="30dp"
+            android:textSize="@dimen/text_title"
             android:text="Stop Watch"/>
 
         <LinearLayout
@@ -241,7 +241,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="20dp"
+                android:textSize="@dimen/text_body"
                 android:text="00:00"/>
 
             <Button

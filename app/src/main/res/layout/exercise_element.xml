@@ -30,7 +30,7 @@
             android:maxLines="1"
             android:textSize="25sp"
             android:textStyle="bold"
-            android:text="Bench" />
+            android:text="Bein Ding auseinander" />
 
         <TextView
             android:id="@+id/exerciseSets"

@@ -18,7 +18,7 @@ public class NewTrainingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_training);
         setTitle("Create a new Training");
-        button = findViewById(R.id.button3);
+        button = findViewById(R.id.button_gym);
         type = TrainingType.GYM;
     }
 
@@ -30,7 +30,7 @@ public class NewTrainingActivity extends AppCompatActivity {
             data.putExtra(TrainingListActivity.TrainingCreateExtra, training);
             setResult(RESULT_OK, data);
             finish();
-        } else if (view.getId() == R.id.button3) {
+        } else if (view.getId() == R.id.button_gym) {
             String text = button.getText().toString();
 
             switch (text) {

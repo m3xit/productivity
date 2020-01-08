@@ -34,6 +34,7 @@ public class TrainingDetailsActivity extends AppCompatActivity implements Exerci
         training.addExercise(new Exercise("Schulter", "10x12,5\n5x20\n10x17,5"));
         training.addExercise(new Exercise("Trizeps", "10x12,5\n5x20\n10x17,5"));
         training.addExercise(new Exercise("Rückenstrecker", "10x12,5\n5x20\n10x17,5"));
+        training.addExercise(new Exercise("Bein Ding auseinander", "10x12,5\n5x20\n10x17,5"));
 
         exercises = training.getExercises();
 

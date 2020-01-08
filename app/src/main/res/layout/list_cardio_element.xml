@@ -29,7 +29,7 @@
             android:id="@+id/training_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
+            android:textSize="@dimen/text_title"
             android:gravity="center"
             android:layout_margin="8dp" />
 
