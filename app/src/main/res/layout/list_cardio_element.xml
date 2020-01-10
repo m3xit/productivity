@@ -12,7 +12,8 @@
         android:id="@+id/imageView"
         android:layout_width="80dp"
         android:layout_height="match_parent"
-        app:srcCompat="@drawable/ic_directions_run_black_24dp" />
+        android:contentDescription="@string/content_description_training_cardio_icon"
+        app:srcCompat="@drawable/ic_directions_run_black_24dp"/>
 
     <View
         android:layout_width="1dp"

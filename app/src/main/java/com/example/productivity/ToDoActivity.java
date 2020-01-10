@@ -17,7 +17,7 @@ public class ToDoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("To Do");
+        setTitle(R.string.todo);
         setContentView(R.layout.activity_to_do);
 
         SharedPreferences settings = getApplicationContext().getSharedPreferences(key, 0);

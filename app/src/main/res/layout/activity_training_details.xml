@@ -17,8 +17,7 @@
         android:textStyle="bold"
         android:background="@color/lighterBackground"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/spacer"
-        android:text="TextView" />
+        app:layout_constraintBottom_toTopOf="@+id/spacer"/>
     
     <View
         android:id="@+id/spacer"

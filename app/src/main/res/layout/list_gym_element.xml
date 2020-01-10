@@ -5,14 +5,15 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:background="@color/darkRed"
-    android:padding="4dp" >
+    android:padding="4dp">
 
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="80dp"
         android:layout_height="match_parent"
-        app:srcCompat="@drawable/ic_fitness_center_black_24dp" />
+        android:contentDescription="@string/content_description_training_gym_icon"
+        app:srcCompat="@drawable/ic_fitness_center_black_24dp"/>
 
     <View
         android:layout_width="1dp"
@@ -23,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="4dp" >
+        android:padding="4dp">
 
         <TextView
             android:id="@+id/training_title"
@@ -31,7 +32,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_title"
             android:gravity="center"
-            android:layout_margin="8dp" />
+            android:layout_margin="8dp"/>
 
         <View
             android:layout_width="match_parent"
@@ -42,14 +43,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingTop="4dp" >
+            android:paddingTop="4dp">
 
             <TextView
                 android:id="@+id/training_date"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:layout_weight="1" />
+                android:layout_weight="1"/>
 
             <View
                 android:layout_width="1dp"
@@ -61,7 +62,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:layout_weight="1" />
+                android:layout_weight="1"/>
 
         </LinearLayout>
 

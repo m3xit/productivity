@@ -18,7 +18,8 @@
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Appointment Name"/>
+            android:hint="@string/appointment_name"
+            android:autofillHints="@string/appointment_name"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Date"
+                android:text="@string/date"
                 android:onClick="onClick"/>
 
             <Button
@@ -41,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Time"
+                android:text="@string/time"
                 android:onClick="onClick"/>
 
         </LinearLayout>
@@ -50,7 +51,7 @@
             android:id="@+id/done"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Done"
+            android:text="@string/done"
             android:onClick="onClick"/>
 
     </LinearLayout>

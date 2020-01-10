@@ -23,13 +23,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_title"
-            android:text="Start a Training"/>
+            android:text="@string/start_training"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Choose a training type"/>
+            android:text="@string/choose_type"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -41,7 +41,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Gym"
+                android:text="@string/gym"
                 android:onClick="onClick"/>
 
             <Button
@@ -49,7 +49,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Cardio"
+                android:text="@string/cardio"
                 android:onClick="onClick"/>
 
             <Button
@@ -57,7 +57,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Climbing"
+                android:text="@string/climbing"
                 android:onClick="onClick"/>
 
             <Button
@@ -65,7 +65,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Other..."
+                android:text="@string/other"
                 android:onClick="onClick"/>
 
         </LinearLayout>
@@ -74,7 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Type a training title"/>
+            android:text="@string/training_title"/>
 
         <EditText
             android:id="@+id/editText"
@@ -82,14 +82,14 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:maxLines="1"
-            android:hint="Traingin Title"/>
+            android:hint="@string/training_title"/>
 
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Start"
+            android:text="@string/start"
             android:layout_gravity="center"
             android:onClick="onClick"/>
 
@@ -110,14 +110,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textSize="@dimen/text_title"
-            android:text="Record past training"/>
+            android:text="@string/record_past"/>
 
         <Button
             android:id="@+id/button_past_training"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Start"/>
+            android:text="@string/start"/>
 
     </LinearLayout>
 

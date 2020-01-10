@@ -33,7 +33,7 @@ public class TimerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
-        setTitle("Pomodoro Timer");
+        setTitle(R.string.timer);
 
         pomodoroStart = findViewById(R.id.pomodoroButtonStart);
         pomodoroReset = findViewById(R.id.pomodoroButtonReset);
