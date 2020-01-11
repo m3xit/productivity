@@ -23,7 +23,7 @@ public class TimerActivity extends AppCompatActivity {
     private TextView timerText;
 
     private boolean pomodoroRunning = false, pauseRunning = false, timerRunning = false;
-    private static long pomodoroTime = 25*60*1000, pauseTime = 5*60*1000;
+    private final long pomodoroTime = 25*60*1000, pauseTime = 5*60*1000;
     private long pomodoroRemaining, pauseRemaining, timerRemaining;
     private CountDownTimer pomodoro, pause, timer;
     private String CHANNEL_ID = "com.example.productivity.notification";
@@ -68,9 +68,16 @@ public class TimerActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         setStatistics();
-        pomodoro.cancel();
-        pause.cancel();
-        timer.cancel();
+
+        if (pomodoro != null) {
+            pomodoro.cancel();
+        }
+        if (pause != null) {
+            pause.cancel();
+        }
+        if (timer != null) {
+            timer.cancel();
+        }
     }
 
     public void onClick(View view) {
@@ -85,7 +92,7 @@ public class TimerActivity extends AppCompatActivity {
                 startPause();
                 break;
             case R.id.pauseButtonReset:
-                startPause();
+                resetPause();
                 break;
             case R.id.timer_start1:
                 startTimer();
@@ -122,7 +129,7 @@ public class TimerActivity extends AppCompatActivity {
             } catch (NumberFormatException e) {
                 timerMinites.setVisibility(View.GONE);
                 timerText.setVisibility(View.VISIBLE);
-                timerText.setText("Press reset and enter a time");
+                timerText.setText("Invalid time");
                 timerRunning = true;
                 timerStart.setText(R.string.reset);
             }
@@ -130,9 +137,10 @@ public class TimerActivity extends AppCompatActivity {
         } else {
             timerText.setVisibility(View.GONE);
             timerMinites.setVisibility(View.VISIBLE);
-            timerMinites.setText(timerRemaining+"");
+            timerMinites.setText(timerRemaining/60000+"");
             timerStart.setText(R.string.start);
             timerRunning = false;
+            timer.cancel();
         }
     }
 
@@ -210,6 +218,7 @@ public class TimerActivity extends AppCompatActivity {
         }
         pauseRunning = false;
         pauseRemaining = pauseTime;
+        System.out.println(pauseRemaining + "''''''''''''''''''" + pauseTime);
         pauseReset.setVisibility(View.GONE);
         setRemainingTimeText(pauseText, pauseRemaining);
         pauseStart.setText(R.string.start);
@@ -234,7 +243,6 @@ public class TimerActivity extends AppCompatActivity {
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
 
-// notificationId is a unique int for each notification that you must define
         notificationManager.notify(notificationId, builder.build());
 
     }
