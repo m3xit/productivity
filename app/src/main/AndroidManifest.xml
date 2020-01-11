@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".NewAppointmentActivity"></activity>
+        <activity android:name=".EditNoteActivity"></activity>
+        <activity android:name=".NewAppointmentActivity" />
         <activity
             android:name=".TimerActivity"
             android:parentActivityName=".MainActivity" />

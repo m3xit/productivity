@@ -5,7 +5,7 @@
     <string name="week_plan">Week Plan</string>
     <string name="timer">Timer</string>
 
-<!--week plan-->
+    <!--week plan-->
     <string name="appointment_name">Appointment Name</string>
     <string name="date">Date</string>
     <string name="time">Time</string>
@@ -13,7 +13,7 @@
     <string name="add_appointment">Add Appointment</string>
     <string name="content_description_week_plan">Image of weekly schedule</string>
 
-<!--training-->
+    <!--training-->
     <string name="start_training">Start a Training</string>
     <string name="choose_type">Choose a training type</string>
     <string name="gym">Gym</string>
@@ -27,7 +27,7 @@
     <string name="content_description_training_cardio_icon">Cardio Icon</string>
     <string name="content_description_training_gym_icon">Gym Icon</string>
 
-<!--timer-->
+    <!--timer-->
     <string name="pomodoro_timer">Pomodoro Timer</string>
     <string name="reset">Reset</string>
     <string name="pause">Pause</string>

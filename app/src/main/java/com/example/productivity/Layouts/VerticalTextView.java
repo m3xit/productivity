@@ -1,4 +1,4 @@
-package com.example.productivity;
+package com.example.productivity.Layouts;
 
 import android.content.Context;
 import android.graphics.Canvas;

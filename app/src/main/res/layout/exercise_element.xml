@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <com.example.productivity.VerticalTextView
+        <com.example.productivity.Layouts.VerticalTextView
             android:id="@+id/exerciseName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
