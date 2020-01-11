@@ -12,16 +12,20 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class TimerActivity extends AppCompatActivity {
 
-    private Button pomodoroStart, pomodoroReset, pauseStart, pauseReset;
+    private Button pomodoroStart, pomodoroReset, pauseStart, pauseReset, timerStart;
     private TextView pomodoroText, pauseText, statistics;
-    private boolean pomodoroRunning = false, pauseRunning = false;
+    private EditText timerMinites;
+    private TextView timerText;
+
+    private boolean pomodoroRunning = false, pauseRunning = false, timerRunning = false;
     private static long pomodoroTime = 25*60*1000, pauseTime = 5*60*1000;
-    private long pomodoroRemaining, pauseRemaining;
-    private CountDownTimer pomodoro, pause;
+    private long pomodoroRemaining, pauseRemaining, timerRemaining;
+    private CountDownTimer pomodoro, pause, timer;
     private String CHANNEL_ID = "com.example.productivity.notification";
     private int notificationId = 1337;
     private int count = 0;
@@ -39,13 +43,18 @@ public class TimerActivity extends AppCompatActivity {
         pomodoroReset = findViewById(R.id.pomodoroButtonReset);
         pauseStart = findViewById(R.id.pauseButtonStart);
         pauseReset = findViewById(R.id.pauseButtonReset);
+        timerStart = findViewById(R.id.timer_start1);
 
         pomodoroText = findViewById(R.id.pomodoroText);
         pauseText = findViewById(R.id.pauseText);
         statistics = findViewById(R.id.statistics);
 
+        timerMinites = findViewById(R.id.timer_number1);
+        timerText = findViewById(R.id.timer_text1);
+
         pomodoro = null;
         pause = null;
+        timer = null;
 
         resetPomodoro();
         resetPause();
@@ -59,6 +68,9 @@ public class TimerActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         setStatistics();
+        pomodoro.cancel();
+        pause.cancel();
+        timer.cancel();
     }
 
     public void onClick(View view) {
@@ -75,6 +87,52 @@ public class TimerActivity extends AppCompatActivity {
             case R.id.pauseButtonReset:
                 startPause();
                 break;
+            case R.id.timer_start1:
+                startTimer();
+                break;
+        }
+    }
+
+    private void startTimer() {
+        if (!timerRunning) {
+            try {
+                timerRemaining = Long.parseLong(timerMinites.getText().toString())*1000*60;
+
+                System.out.println(timerRemaining + "*************************");
+
+                timerMinites.setVisibility(View.GONE);
+                timerText.setVisibility(View.VISIBLE);
+
+                timer = new CountDownTimer(timerRemaining, 1000) {
+
+                    public void onTick(long millisUntilFinished) {
+                        timerRemaining = millisUntilFinished;
+                        setRemainingTimeText(timerText, timerRemaining);
+                    }
+
+                    public void onFinish() {
+                        timerText.setText(R.string.done);
+                        timerRunning = false;
+                        sendNotofication("Timer finished", "");
+                    }
+                }.start();
+
+                timerRunning = true;
+                timerStart.setText(R.string.reset);
+            } catch (NumberFormatException e) {
+                timerMinites.setVisibility(View.GONE);
+                timerText.setVisibility(View.VISIBLE);
+                timerText.setText("Press reset and enter a time");
+                timerRunning = true;
+                timerStart.setText(R.string.reset);
+            }
+
+        } else {
+            timerText.setVisibility(View.GONE);
+            timerMinites.setVisibility(View.VISIBLE);
+            timerMinites.setText(timerRemaining+"");
+            timerStart.setText(R.string.start);
+            timerRunning = false;
         }
     }
 
@@ -84,11 +142,11 @@ public class TimerActivity extends AppCompatActivity {
 
                 public void onTick(long millisUntilFinished) {
                     pomodoroRemaining = millisUntilFinished;
-                    pomodoroSetText();
+                    setRemainingTimeText(pomodoroText, pomodoroRemaining);
                 }
 
                 public void onFinish() {
-                    pomodoroText.setText("Done!");
+                    pomodoroText.setText(R.string.done);
                     pomodoroRunning = false;
                     sendNotofication("Pomodoro finished", "Time for a pause");
                     count ++;
@@ -99,11 +157,11 @@ public class TimerActivity extends AppCompatActivity {
 
             pomodoroRunning = true;
             pomodoroReset.setVisibility(View.VISIBLE);
-            pomodoroStart.setText("Pause");
+            pomodoroStart.setText(R.string.pause);
 
         } else {
             pomodoro.cancel();
-            pomodoroStart.setText("Resume");
+            pomodoroStart.setText(R.string.resume);
             pomodoroRunning = false;
         }
     }
@@ -115,8 +173,8 @@ public class TimerActivity extends AppCompatActivity {
         pomodoroRunning = false;
         pomodoroRemaining = pomodoroTime;
         pomodoroReset.setVisibility(View.GONE);
-        pomodoroText.setText(secondsToString((int) (pomodoroRemaining / 1000)) + " min");
-        pomodoroStart.setText("Start");
+        setRemainingTimeText(pomodoroText, pomodoroRemaining);
+        pomodoroStart.setText(R.string.start);
     }
 
     private void startPause() {
@@ -125,11 +183,11 @@ public class TimerActivity extends AppCompatActivity {
 
                 public void onTick(long millisUntilFinished) {
                     pauseRemaining = millisUntilFinished;
-                    pauseSetText();
+                    setRemainingTimeText(pauseText, pauseRemaining);
                 }
 
                 public void onFinish() {
-                    pauseText.setText("Done!");
+                    pauseText.setText(R.string.done);
                     pauseRunning = false;
                     sendNotofication("Pause finished", "Get back to work");
                 }
@@ -137,11 +195,11 @@ public class TimerActivity extends AppCompatActivity {
 
             pauseRunning = true;
             pauseReset.setVisibility(View.VISIBLE);
-            pauseStart.setText("Pause");
+            pauseStart.setText(R.string.pause);
 
         } else {
             pause.cancel();
-            pauseStart.setText("Resume");
+            pauseStart.setText(R.string.resume);
             pauseRunning = false;
         }
     }
@@ -153,16 +211,12 @@ public class TimerActivity extends AppCompatActivity {
         pauseRunning = false;
         pauseRemaining = pauseTime;
         pauseReset.setVisibility(View.GONE);
-        pauseSetText();
-        pauseStart.setText("Start");
+        setRemainingTimeText(pauseText, pauseRemaining);
+        pauseStart.setText(R.string.start);
     }
 
-    private void pomodoroSetText() {
-        pomodoroText.setText(secondsToString((int) (pomodoroRemaining/1000)) + " min");
-    }
-
-    private void pauseSetText() {
-        pauseText.setText(secondsToString((int) (pauseRemaining/1000)) + " min");
+    private void setRemainingTimeText(TextView textView, long time) {
+        textView.setText(secondsToString((int) (time/1000)) + " min");
     }
 
     private String secondsToString(int seconds) {

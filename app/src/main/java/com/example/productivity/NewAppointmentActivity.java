@@ -36,13 +36,13 @@ public class NewAppointmentActivity extends AppCompatActivity {
         name = findViewById(R.id.name);
 
         mYear = 2020;
-        mMonth = 1;
+        mMonth = 0;
         mDay = 8;
 
         mHour = 12;
         mMinute = 0;
 
-        date.setText(mDay + "." + mMonth + "." + mYear);
+        date.setText(mDay + "." + mMonth + 1 + "." + mYear);
 
         time.setText(mHour + ":" + mMinute);
     }
@@ -61,7 +61,7 @@ public class NewAppointmentActivity extends AppCompatActivity {
                             mMonth = monthOfYear;
                             mDay = dayOfMonth;
 
-                            date.setText(dayOfMonth + "." + monthOfYear + "." + year);
+                            date.setText(mDay + "." + mMonth + 1 + "." + mYear);
                         }
                     }, mYear, mMonth, mDay);
             datePickerDialog.show();
@@ -77,7 +77,7 @@ public class NewAppointmentActivity extends AppCompatActivity {
                             mHour = hourOfDay;
                             mMinute = minute;
 
-                            time.setText(hourOfDay + ":" + minute);
+                            time.setText(mHour + ":" + mMinute);
                         }
                     }, mHour, mMinute, false);
             timePickerDialog.show();

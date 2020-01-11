@@ -160,19 +160,29 @@
                 android:layout_gravity="center"
                 android:orientation="vertical"
                 android:background="@color/darkBlue">
-                <!--todo-->
-                <NumberPicker
-                    android:id="@+id/number_picker1"
+
+                <EditText
+                    android:id="@+id/timer_number1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:text="@string/zero"
+                    android:inputType="number"/>
+
+                <TextView
+                    android:id="@+id/timer_text1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone"/>
 
                 <Button
                     android:id="@+id/timer_start1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/start"/>
+                    android:text="@string/start"
+                    android:onClick="onClick"/>
 
             </LinearLayout>
 
@@ -185,11 +195,20 @@
                 android:orientation="vertical"
                 android:background="@color/darkBlue">
 
-                <NumberPicker
-                    android:id="@+id/number_picker2"
+                <EditText
+                    android:id="@+id/timer_number2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:text="@string/zero"
+                    android:inputType="number"/>
+
+                <TextView
+                    android:id="@+id/timer_text2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone"/>
 
                 <Button
                     android:id="@+id/timer_start2"
