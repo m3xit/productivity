@@ -1,4 +1,4 @@
-package com.example.productivity;
+package com.example.productivity.Calendar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,16 +9,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TimePicker;
+
+import com.example.productivity.R;
 
 public class NewAppointmentActivity extends AppCompatActivity {
 

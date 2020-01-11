@@ -1,4 +1,4 @@
-package com.example.productivity;
+package com.example.productivity.Training;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,13 +9,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.productivity.R;
+
 import java.util.List;
 
 public class ExerciseListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<Exercise> exercises;
     private LayoutInflater mInflater;
-    private com.example.productivity.ExerciseListAdapter.ItemClickListener mClickListener;
+    private ExerciseListAdapter.ItemClickListener mClickListener;
 
     // data is passed into the constructor
     ExerciseListAdapter(Context context, List<Exercise> data) {
@@ -27,14 +29,14 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View view = mInflater.inflate(R.layout.exercise_element, viewGroup, false);
-        return new com.example.productivity.ExerciseListAdapter.ExerciseViewHolder(view);
+        return new ExerciseListAdapter.ExerciseViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
         Exercise exercise = exercises.get(position);
-        ((com.example.productivity.ExerciseListAdapter.ExerciseViewHolder) viewHolder).name.setText(exercise.getName());
-        ((com.example.productivity.ExerciseListAdapter.ExerciseViewHolder) viewHolder).sets.setText(exercise.getSets());
+        ((ExerciseListAdapter.ExerciseViewHolder) viewHolder).name.setText(exercise.getName());
+        ((ExerciseListAdapter.ExerciseViewHolder) viewHolder).sets.setText(exercise.getSets());
     }
 
     // total number of rows
@@ -67,7 +69,7 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     // allows clicks events to be caught
-    void setClickListener(com.example.productivity.ExerciseListAdapter.ItemClickListener itemClickListener) {
+    void setClickListener(ExerciseListAdapter.ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 

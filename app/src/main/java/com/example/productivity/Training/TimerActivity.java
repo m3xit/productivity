@@ -1,4 +1,4 @@
-package com.example.productivity;
+package com.example.productivity.Training;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.productivity.R;
 
 public class TimerActivity extends AppCompatActivity {
 

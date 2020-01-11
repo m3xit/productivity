@@ -6,6 +6,11 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.productivity.Calendar.WeekPlanActivity;
+import com.example.productivity.Notes.ToDoActivity;
+import com.example.productivity.Training.TimerActivity;
+import com.example.productivity.Training.TrainingListActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override

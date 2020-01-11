@@ -1,4 +1,4 @@
-package com.example.productivity;
+package com.example.productivity.Training;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.productivity.R;
 
 import java.util.List;
 

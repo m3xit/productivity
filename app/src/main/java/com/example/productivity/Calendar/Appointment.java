@@ -1,8 +1,6 @@
-package com.example.productivity;
+package com.example.productivity.Calendar;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Appointment implements Serializable {
     private String name;

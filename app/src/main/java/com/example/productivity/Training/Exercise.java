@@ -1,4 +1,4 @@
-package com.example.productivity;
+package com.example.productivity.Training;
 
 public class Exercise {
 

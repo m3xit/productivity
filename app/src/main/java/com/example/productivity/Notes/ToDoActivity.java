@@ -1,4 +1,4 @@
-package com.example.productivity;
+package com.example.productivity.Notes;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -10,6 +10,8 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+
+import com.example.productivity.R;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -12,28 +12,28 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".EditNoteActivity"
-            android:parentActivityName=".ToDoActivity"/>
+            android:name=".Notes.EditNoteActivity"
+            android:parentActivityName=".Notes.ToDoActivity"/>
         <activity
-            android:name=".NewAppointmentActivity"
-            android:parentActivityName=".WeekPlanActivity" />
+            android:name=".Calendar.NewAppointmentActivity"
+            android:parentActivityName=".Calendar.WeekPlanActivity" />
         <activity
-            android:name=".TimerActivity"
+            android:name=".Training.TimerActivity"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".TrainingDetailsActivity"
-            android:parentActivityName=".TrainingListActivity" />
+            android:name=".Training.TrainingDetailsActivity"
+            android:parentActivityName=".Training.TrainingListActivity" />
         <activity
-            android:name=".NewTrainingActivity"
-            android:parentActivityName=".TrainingListActivity" />
+            android:name=".Training.NewTrainingActivity"
+            android:parentActivityName=".Training.TrainingListActivity" />
         <activity
-            android:name=".TrainingListActivity"
+            android:name=".Training.TrainingListActivity"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".WeekPlanActivity"
+            android:name=".Calendar.WeekPlanActivity"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".ToDoActivity"
+            android:name=".Notes.ToDoActivity"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
