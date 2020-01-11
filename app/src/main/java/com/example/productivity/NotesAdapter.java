@@ -25,12 +25,12 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
             super(v);
             title = v.findViewById(R.id.title);
             body = v.findViewById(R.id.body);
+            v.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
-            System.out.println("***************************");
         }
     }
 

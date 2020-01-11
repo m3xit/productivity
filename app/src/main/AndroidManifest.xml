@@ -11,8 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".EditNoteActivity"></activity>
-        <activity android:name=".NewAppointmentActivity" />
+        <activity
+            android:name=".EditNoteActivity"
+            android:parentActivityName=".ToDoActivity"/>
+        <activity
+            android:name=".NewAppointmentActivity"
+            android:parentActivityName=".WeekPlanActivity" />
         <activity
             android:name=".TimerActivity"
             android:parentActivityName=".MainActivity" />

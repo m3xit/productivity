@@ -14,6 +14,7 @@
         android:background="@color/lighterBackground"
         android:textSize="@dimen/text_title"
         android:layout_margin="@dimen/standart_margin"
+        android:padding="@dimen/standart_margin"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
@@ -25,6 +26,7 @@
         android:background="@color/lighterBackground"
         android:textSize="@dimen/text_body"
         android:layout_margin="@dimen/standart_margin"
+        android:padding="@dimen/standart_margin"
         app:layout_constraintTop_toBottomOf="@id/title"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
