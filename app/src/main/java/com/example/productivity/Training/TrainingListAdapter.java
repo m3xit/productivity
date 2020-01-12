@@ -18,7 +18,8 @@ public class TrainingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private List<Training> trainings;
     private LayoutInflater mInflater;
-    private ItemClickListener mClickListener;
+    private ItemClickListener clickListener;
+    private ItemLongClickListener longClickListener;
 
     // data is passed into the constructor
     TrainingListAdapter(Context context, List<Training> data) {
@@ -83,15 +84,14 @@ public class TrainingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         @Override
         public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+            if (clickListener != null) clickListener.onItemClick(view, getAdapterPosition());
         }
 
         @Override
         public boolean onLongClick(View view) {
-            trainings.remove(getAdapterPosition());
-            notifyItemRemoved(getAdapterPosition());
-            notifyItemRangeChanged(getAdapterPosition(), trainings.size());
-            return true;
+            if (longClickListener != null) {
+                return longClickListener.onItemLongClick(view, getAdapterPosition());
+            } else return false;
         }
     }
 
@@ -127,131 +127,23 @@ public class TrainingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
-    /*public class GymViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
-        TextView title;
-        TextView date;
-        TextView duration;
-
-        GymViewHolder(View itemView) {
-            super(itemView);
-            title = itemView.findViewById(R.id.training_title);
-            date = itemView.findViewById(R.id.training_date);
-            duration = itemView.findViewById(R.id.training_duration);
-            itemView.setOnClickListener(this);
-            itemView.setOnLongClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
-        }
-
-        @Override
-        public boolean onLongClick(View view) {
-            trainings.remove(getAdapterPosition());
-            notifyItemRemoved(getAdapterPosition());
-            notifyItemRangeChanged(getAdapterPosition(), trainings.size());
-            return true;
-        }
-    }
-
-    public class CardioViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
-        TextView title;
-        TextView date;
-        TextView duration;
-
-        CardioViewHolder(View itemView) {
-            super(itemView);
-            title = itemView.findViewById(R.id.training_title);
-            date = itemView.findViewById(R.id.training_date);
-            duration = itemView.findViewById(R.id.training_duration);
-            itemView.setOnClickListener(this);
-            itemView.setOnLongClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
-        }
-
-        @Override
-        public boolean onLongClick(View view) {
-            trainings.remove(getAdapterPosition());
-            notifyItemRemoved(getAdapterPosition());
-            notifyItemRangeChanged(getAdapterPosition(), trainings.size());
-            return true;
-        }
-    }
-
-    public class ClimbingViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
-        TextView title;
-        TextView date;
-        TextView duration;
-
-        ClimbingViewHolder(View itemView) {
-            super(itemView);
-            ImageView image = itemView.findViewById(R.id.imageView);
-            image.setImageResource(R.drawable.ic_terrain_black_24dp);
-            title = itemView.findViewById(R.id.training_title);
-            date = itemView.findViewById(R.id.training_date);
-            duration = itemView.findViewById(R.id.training_duration);
-            itemView.setOnClickListener(this);
-            itemView.setOnLongClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
-        }
-
-        @Override
-        public boolean onLongClick(View view) {
-            trainings.remove(getAdapterPosition());
-            notifyItemRemoved(getAdapterPosition());
-            notifyItemRangeChanged(getAdapterPosition(), trainings.size());
-            return true;
-        }
-    }
-
-    public class OtherViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
-        TextView title;
-        TextView date;
-        TextView duration;
-
-        OtherViewHolder(View itemView) {
-            super(itemView);
-            ImageView image = itemView.findViewById(R.id.imageView);
-            image.setImageResource(R.drawable.ic_add_black_24dp);
-            title = itemView.findViewById(R.id.training_title);
-            date = itemView.findViewById(R.id.training_date);
-            duration = itemView.findViewById(R.id.training_duration);
-            itemView.setOnClickListener(this);
-            itemView.setOnLongClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
-        }
-
-        @Override
-        public boolean onLongClick(View view) {
-            trainings.remove(getAdapterPosition());
-            notifyItemRemoved(getAdapterPosition());
-            notifyItemRangeChanged(getAdapterPosition(), trainings.size());
-            return true;
-        }
-    }*/
-
     Training getItem(int id) {
         return trainings.get(id);
     }
 
     void setClickListener(ItemClickListener itemClickListener) {
-        this.mClickListener = itemClickListener;
+        this.clickListener = itemClickListener;
+    }
+
+    void setLongClickListener(ItemLongClickListener itemLongClickListener) {
+        this.longClickListener = itemLongClickListener;
     }
 
     public interface ItemClickListener {
         void onItemClick(View view, int position);
+    }
+
+    public interface ItemLongClickListener {
+        boolean onItemLongClick(View view, int position);
     }
 }

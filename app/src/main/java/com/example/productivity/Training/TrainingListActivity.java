@@ -21,7 +21,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrainingListActivity extends AppCompatActivity implements TrainingListAdapter.ItemClickListener {
+public class TrainingListActivity extends AppCompatActivity implements TrainingListAdapter.ItemClickListener, TrainingListAdapter.ItemLongClickListener {
 
     TrainingListAdapter adapter;
     List<Training> trainings;
@@ -47,38 +47,16 @@ public class TrainingListActivity extends AppCompatActivity implements TrainingL
 
         trainings = new ArrayList<>();
 
-        try {
-            FileInputStream fis = this.openFileInput("trainings");
-            ObjectInputStream is = new ObjectInputStream(fis);
-            trainings = (List<Training>) is.readObject();
-            is.close();
-            fis.close();
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        }
+        readTrainings();
 
         recyclerView = findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new TrainingListAdapter(this, trainings);
         adapter.setClickListener(this);
+        adapter.setLongClickListener(this);
         recyclerView.setAdapter(adapter);
 
         recyclerView.addItemDecoration(new VerticalSpaceItemDecoration(20));
-    }
-
-    protected void onDestroy() {
-        super.onDestroy();
-
-        try {
-            FileOutputStream fos = this.openFileOutput("trainings", Context.MODE_PRIVATE);
-            ObjectOutputStream os = new ObjectOutputStream(fos);
-            os.writeObject(trainings);
-            os.close();
-            fos.close();
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        }
-
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -87,6 +65,8 @@ public class TrainingListActivity extends AppCompatActivity implements TrainingL
                 Training newTraining = (Training) data.getExtras().get(TrainingCreateExtra);
                 trainings.add(0, newTraining);
                 adapter.notifyDataSetChanged();
+
+                writeTrainings();
             }
         }
     }
@@ -97,6 +77,39 @@ public class TrainingListActivity extends AppCompatActivity implements TrainingL
         Intent intent = new Intent(this, TrainingDetailsActivity.class);
         intent.putExtra(TrainingViewExtra, trainings.get(position));
         startActivity(intent);
+    }
+
+    private void readTrainings() {
+        try {
+            FileInputStream fis = this.openFileInput("trainings");
+            ObjectInputStream is = new ObjectInputStream(fis);
+            trainings = (List<Training>) is.readObject();
+            is.close();
+            fis.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+    }
+
+    private void writeTrainings() {
+        try {
+            FileOutputStream fos = this.openFileOutput("trainings", Context.MODE_PRIVATE);
+            ObjectOutputStream os = new ObjectOutputStream(fos);
+            os.writeObject(trainings);
+            os.close();
+            fos.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+    }
+
+    @Override
+    public boolean onItemLongClick(View view, int position) {
+        trainings.remove(position);
+        adapter.notifyItemRemoved(position);
+        adapter.notifyItemRangeChanged(position, trainings.size());
+        writeTrainings();
+        return true;
     }
 }
 
