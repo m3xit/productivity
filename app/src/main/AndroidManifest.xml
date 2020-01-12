@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Training.EditTrainingActivity"></activity>
+        <activity
+            android:name=".Training.EditTrainingActivity"/>
         <activity
             android:name=".Notes.EditNoteActivity"
             android:parentActivityName=".Notes.ToDoActivity" />
@@ -26,7 +27,6 @@
             android:parentActivityName=".Training.TrainingListActivity" />
         <activity
             android:name=".Training.NewTrainingActivity"
-            android:noHistory="false"
             android:parentActivityName=".Training.TrainingListActivity" />
         <activity
             android:name=".Training.TrainingListActivity"

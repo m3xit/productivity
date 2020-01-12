@@ -1,6 +1,8 @@
 package com.example.productivity.Training;
 
-public class Exercise {
+import java.io.Serializable;
+
+public class Exercise implements Serializable {
 
     private String name, sets;
 
@@ -15,5 +17,13 @@ public class Exercise {
 
     public String getName() {
         return name;
+    }
+
+    public void addSet(String set) {
+        if (sets.equals("")) {
+            sets = set;
+        } else {
+            this.sets += "\n" + set;
+        }
     }
 }

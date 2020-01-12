@@ -25,6 +25,10 @@ public class Training implements Serializable {
         exercises.add(e);
     }
 
+    void addSet(int position, String set) {
+        exercises.get(position).addSet(set);
+    }
+
     public void setDuration(int duration) {
         this.duration = duration;
     }
@@ -48,6 +52,14 @@ public class Training implements Serializable {
 
     List<Exercise> getExercises() {
         return exercises;
+    }
+
+    Exercise getExercise(int position) {
+        if (position < exercises.size()) {
+            return exercises.get(position);
+        }
+
+        return null;
     }
 }
 

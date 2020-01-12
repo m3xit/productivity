@@ -35,12 +35,21 @@ public class NewTrainingActivity extends AppCompatActivity {
 
     public void onClick(View view) {
         if (view.getId() == R.id.start_training) {
-            Intent data = new Intent();
-            String name = ((EditText)findViewById(R.id.editText)).getText().toString();
-            Training training = new Training(name, type);
-            data.putExtra(TrainingListActivity.TrainingCreateExtra, training);
-            setResult(RESULT_OK, data);
-            finish();
+            if (type == TrainingType.GYM) {
+                Intent intent = new Intent(this, EditTrainingActivity.class);
+                String name = ((EditText)findViewById(R.id.editText)).getText().toString();
+                Training training = new Training(name, type);
+                intent.putExtra(TrainingListActivity.TrainingCreateExtra, training);
+                startActivityForResult(intent, TrainingListActivity.requestCodeNewTraining);
+            } else {
+                Intent intent = new Intent();
+                String name = ((EditText)findViewById(R.id.editText)).getText().toString();
+                Training training = new Training(name, type);
+                intent.putExtra(TrainingListActivity.TrainingCreateExtra, training);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+
         } else if (view.getId() == R.id.button_gym) {
             changeType(TrainingType.GYM);
         } else if (view.getId() == R.id.button_cardio) {
@@ -85,6 +94,15 @@ public class NewTrainingActivity extends AppCompatActivity {
             case OTHER:
                 other.setBackground(getDrawable(R.color.darkRed));
                 break;
+        }
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == TrainingListActivity.requestCodeNewTraining) {
+            if (resultCode == RESULT_OK) {
+                setResult(RESULT_OK, data);
+                finish();
+            }
         }
     }
 }

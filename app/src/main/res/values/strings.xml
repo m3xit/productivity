@@ -20,12 +20,13 @@
     <string name="cardio">Cardio</string>
     <string name="climbing">Climbing</string>
     <string name="other">Other...</string>
-    <string name="training_title">Traingin Title</string>
+    <string name="training_title">Training Title</string>
     <string name="start">Start</string>
     <string name="record_past">Record past training</string>
     <string name="content_description_exercise_icon">Exercise Icon</string>
     <string name="content_description_training_cardio_icon">Cardio Icon</string>
     <string name="content_description_training_gym_icon">Gym Icon</string>
+    <string name="save">Save</string>
 
     <!--timer-->
     <string name="pomodoro_timer">Pomodoro Timer</string>
