@@ -27,6 +27,7 @@
     <string name="content_description_training_cardio_icon">Cardio Icon</string>
     <string name="content_description_training_gym_icon">Gym Icon</string>
     <string name="save">Save</string>
+    <string name="edit_training">Edit Training</string>
 
     <!--timer-->
     <string name="pomodoro_timer">Pomodoro Timer</string>

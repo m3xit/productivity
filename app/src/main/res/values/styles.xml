@@ -17,4 +17,10 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="AlertDialogStyle" parent="Theme.AppCompat.DayNight.Dialog">
+        <item name="android:colorAccent">@color/darkRed</item>
+        <item name="android:textColor">@color/lighterBackground</item>
+        <item name="android:textColorPrimary">@color/darkBackground</item>
+    </style>
+
 </resources>
