@@ -11,20 +11,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".Training.EditTrainingActivity"></activity>
         <activity
             android:name=".Notes.EditNoteActivity"
-            android:parentActivityName=".Notes.ToDoActivity"/>
+            android:parentActivityName=".Notes.ToDoActivity" />
         <activity
             android:name=".Calendar.NewAppointmentActivity"
             android:parentActivityName=".Calendar.WeekPlanActivity" />
         <activity
-            android:name=".Training.TimerActivity"
+            android:name=".Timer.TimerActivity"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Training.TrainingDetailsActivity"
             android:parentActivityName=".Training.TrainingListActivity" />
         <activity
             android:name=".Training.NewTrainingActivity"
+            android:noHistory="false"
             android:parentActivityName=".Training.TrainingListActivity" />
         <activity
             android:name=".Training.TrainingListActivity"

@@ -1,5 +1,6 @@
 package com.example.productivity;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.productivity.Calendar.WeekPlanActivity;
 import com.example.productivity.Notes.ToDoActivity;
-import com.example.productivity.Training.TimerActivity;
+import com.example.productivity.Timer.TimerActivity;
 import com.example.productivity.Training.TrainingListActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,7 +39,11 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent_pomodoro = new Intent(this, TimerActivity.class);
                 startActivity(intent_pomodoro);
                 break;
+            case R.id.action_button1:
+                final Intent intentDeviceTest = new Intent("com.bambuna.podcastaddict.service.player.toggle");
+                intentDeviceTest.setComponent(new  ComponentName("com.bambuna.podcastaddict","com.bambuna.podcastaddict.receiver.PodcastAddictPlayerReceiver"));
+                sendBroadcast(intentDeviceTest);
+                break;
         }
     }
-
 }

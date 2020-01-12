@@ -21,28 +21,32 @@ public class Training implements Serializable {
         exercises = new ArrayList<>();
     }
 
-    public void addExercise(Exercise e) {
+    void addExercise(Exercise e) {
         exercises.add(e);
     }
 
-    public String getName() {
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    String getName() {
         return name;
     }
 
-    public TrainingType getType() {
+    TrainingType getType() {
         return type;
     }
 
-    public String getDate() {
+    String getDate() {
         SimpleDateFormat ft = new SimpleDateFormat ("dd.MM.yyyy");
         return ft.format(date);
     }
 
-    public int getDuration() {
+    int getDuration() {
         return duration;
     }
 
-    public List<Exercise> getExercises() {
+    List<Exercise> getExercises() {
         return exercises;
     }
 }
@@ -50,5 +54,6 @@ public class Training implements Serializable {
 enum TrainingType {
     CARDIO,
     GYM,
-    CLIMBING
+    CLIMBING,
+    OTHER
 }

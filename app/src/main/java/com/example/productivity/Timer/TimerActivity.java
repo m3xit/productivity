@@ -1,4 +1,4 @@
-package com.example.productivity.Training;
+package com.example.productivity.Timer;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;

@@ -57,20 +57,6 @@ public class TrainingListActivity extends AppCompatActivity implements TrainingL
             System.out.println(e.toString());
         }
 
-//        trainings.add(new Training("Pull", TrainingType.GYM));
-//        trainings.add(new Training("Push", TrainingType.GYM));
-//        trainings.add(new Training("Beine", TrainingType.GYM));
-//        trainings.add(new Training("Joggen", TrainingType.CARDIO));
-//        trainings.add(new Training("Pull", TrainingType.GYM));
-//        trainings.add(new Training("Push", TrainingType.GYM));
-//        trainings.add(new Training("Beine", TrainingType.GYM));
-//        trainings.add(new Training("Joggen Alena", TrainingType.CARDIO));
-//        trainings.add(new Training("Joggen", TrainingType.CARDIO));
-//        trainings.add(new Training("Pull", TrainingType.GYM));
-//        trainings.add(new Training("Push", TrainingType.GYM));
-//        trainings.add(new Training("Beine", TrainingType.GYM));
-//        trainings.add(new Training("Joggen", TrainingType.CARDIO));
-
         recyclerView = findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new TrainingListAdapter(this, trainings);
@@ -118,7 +104,7 @@ class VerticalSpaceItemDecoration extends RecyclerView.ItemDecoration {
 
     private final int verticalSpaceHeight;
 
-    public VerticalSpaceItemDecoration(int verticalSpaceHeight) {
+    VerticalSpaceItemDecoration(int verticalSpaceHeight) {
         this.verticalSpaceHeight = verticalSpaceHeight;
     }
 
