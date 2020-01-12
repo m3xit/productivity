@@ -32,7 +32,7 @@ public class WeekPlanActivity extends AppCompatActivity implements AppointmentAd
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle(R.string.week_plan);
-        setContentView(R.layout.activity_week_plan);
+        setContentView(R.layout.activity_calendar);
 
         addAppointment = findViewById(R.id.add_appointment);
 

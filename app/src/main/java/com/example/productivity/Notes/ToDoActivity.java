@@ -35,7 +35,7 @@ public class ToDoActivity extends AppCompatActivity implements NotesAdapter.Item
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle(R.string.todo);
-        setContentView(R.layout.activity_to_do);
+        setContentView(R.layout.activity_notes);
 
         todoText = findViewById(R.id.todo_text);
 

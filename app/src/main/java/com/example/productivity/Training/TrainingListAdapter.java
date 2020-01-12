@@ -37,17 +37,17 @@ public class TrainingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View view;
         if (viewType == TrainingType.CARDIO.ordinal()) {
-            view = mInflater.inflate(R.layout.list_cardio_element, viewGroup, false);
+            view = mInflater.inflate(R.layout.element_list_cardio, viewGroup, false);
             return new CardioViewHolder(view);
 
         } else if (viewType == TrainingType.GYM.ordinal()) {
-            view = mInflater.inflate(R.layout.list_gym_element, viewGroup, false);
+            view = mInflater.inflate(R.layout.element_list_gym, viewGroup, false);
             return new GymViewHolder(view);
         } else if (viewType == TrainingType.CLIMBING.ordinal()) {
-            view = mInflater.inflate(R.layout.list_cardio_element, viewGroup, false);
+            view = mInflater.inflate(R.layout.element_list_cardio, viewGroup, false);
             return new ClimbingViewHolder(view);
         } else if (viewType == TrainingType.OTHER.ordinal()) {
-            view = mInflater.inflate(R.layout.list_cardio_element, viewGroup, false);
+            view = mInflater.inflate(R.layout.element_list_cardio, viewGroup, false);
             return new OtherViewHolder(view);
         } else {
             throw new TypeNotPresentException("unkows training type", null);

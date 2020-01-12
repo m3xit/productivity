@@ -25,7 +25,7 @@ public class EditTrainingActivity extends AppCompatActivity implements EditExerc
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_training);
+        setContentView(R.layout.activity_training_edit);
 
         training = (Training) getIntent().getExtras().get(TrainingListActivity.TrainingCreateExtra);
 
@@ -74,7 +74,7 @@ public class EditTrainingActivity extends AppCompatActivity implements EditExerc
         if (position == training.getExercises().size()) {
             final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
             LayoutInflater inflater = this.getLayoutInflater();
-            View dialogView = inflater.inflate(R.layout.edit_text_fragment, null);
+            View dialogView = inflater.inflate(R.layout.fragment_edit_text, null);
 
             final EditText editText = dialogView.findViewById(R.id.text);
 
@@ -91,7 +91,7 @@ public class EditTrainingActivity extends AppCompatActivity implements EditExerc
         } else {
             final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
             LayoutInflater inflater = this.getLayoutInflater();
-            View dialogView = inflater.inflate(R.layout.edit_text_fragment, null);
+            View dialogView = inflater.inflate(R.layout.fragment_edit_text, null);
 
             final EditText editText = dialogView.findViewById(R.id.text);
 

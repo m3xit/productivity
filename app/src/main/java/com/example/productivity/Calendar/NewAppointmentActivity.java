@@ -23,7 +23,7 @@ public class NewAppointmentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_appointment);
+        setContentView(R.layout.activity_calendar_new_appointment);
 
         date = findViewById(R.id.date);
         time = findViewById(R.id.time);

@@ -1,13 +1,10 @@
 package com.example.productivity.Training;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -36,10 +33,10 @@ public class EditExerciseAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         if (viewType == TYPE_END) {
-            View view = mInflater.inflate(R.layout.exercise_edit_end_element, viewGroup, false);
+            View view = mInflater.inflate(R.layout.element_exercise_edit_end, viewGroup, false);
             return new EditExerciseEndViewHolder(view);
         } else {
-            View view = mInflater.inflate(R.layout.exercise_edit_element, viewGroup, false);
+            View view = mInflater.inflate(R.layout.element_exercise_edit, viewGroup, false);
             return new EditExerciseViewHolder(view);
         }
 

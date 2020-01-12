@@ -3,7 +3,6 @@ package com.example.productivity.Training;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -21,7 +20,7 @@ public class NewTrainingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_training);
+        setContentView(R.layout.activity_training_new);
         setTitle("Create a new Training");
 
         gym = findViewById(R.id.button_gym);
