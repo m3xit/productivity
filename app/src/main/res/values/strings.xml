@@ -4,6 +4,8 @@
     <string name="training">Training</string>
     <string name="week_plan">Week Plan</string>
     <string name="timer">Timer</string>
+    <string name="podcast_button">P</string>
+    <string name="flashlight_button">F</string>
 
     <!--week plan-->
     <string name="appointment_name">Appointment Name</string>
