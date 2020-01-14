@@ -7,12 +7,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.productivity.R;
+import com.example.productivity.Training.EditExerciseAdapter;
+import com.example.productivity.Training.Exercise;
+
 import java.util.List;
 
 public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder> {
     private List<Todo> todoList;
     private TodoAdapter.ItemClickListener mClickListener;
-    public int TODO_TYPE = 1;
+    private int TYPE_TODO = 0;
+    private int TYPE_END = 1;
 
     public class TodoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView title;
@@ -36,20 +40,22 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
 
     @Override
     public TodoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.element_todo, parent, false);
         return new TodoViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(TodoViewHolder holder, int position) {
-        holder.title.setText(todoList.get(position).getTitle());
-
+        if (position == getItemCount()-1) {
+            //EndViewHolder
+        } else {
+            holder.title.setText(todoList.get(position).getTitle());
+        }
     }
 
     @Override
     public int getItemCount() {
-        return todoList.size();
+        return todoList.size()+1;
     }
 
     void setClickListener(TodoAdapter.ItemClickListener itemClickListener) {
@@ -58,5 +64,14 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
 
     public interface ItemClickListener {
         void onItemClick(View view, int position);
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position == getItemCount()-1) {
+            return TYPE_END;
+        } else {
+            return TYPE_TODO;
+        }
     }
 }

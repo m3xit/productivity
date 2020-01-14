@@ -22,11 +22,14 @@ import com.example.productivity.Calendar.WeekPlanActivity;
 import com.example.productivity.Notes.ToDoActivity;
 import com.example.productivity.Timer.TimerActivity;
 import com.example.productivity.Training.TrainingListActivity;
+import com.example.productivity.stuff.SaveData;
 
 public class MainActivity extends AppCompatActivity {
 
     private final int CAMERA_REQUEST = 1337;
     private boolean hasCameraFlash = false, flashLightStatus = false;
+
+    public static SaveData store;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         hasCameraFlash = getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
+
+        store = new SaveData(getApplicationContext());
     }
 
     public void onClick(View view) {

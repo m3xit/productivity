@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.example.productivity.R;
+import com.example.productivity.stuff.VerticalSpaceItemDecoration;
+
 import android.app.AlertDialog;
 
 public class EditTrainingActivity extends AppCompatActivity implements EditExerciseAdapter.ItemClickListener {

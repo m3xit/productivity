@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.productivity.MainActivity;
 import com.example.productivity.R;
 import com.example.productivity.stuff.GridSpacingItemDecoration;
 import com.example.productivity.stuff.HorizontalSpaceItemDecoration;
@@ -31,16 +32,16 @@ public class ToDoActivity extends AppCompatActivity implements NotesAdapter.Item
     private TodoAdapter todoAdapter;
     private List<Todo> todoList;
 
-    private static String key = "com.example.productivity.ToDoActivity.todoString";
-
     static String editType = "com.example.productivity.ToDoActivity.editType";
     static int editTypeNote = 0;
     static int editTypeTodo = 1;
 
+    private final String noteKey = "com.example.productivity.ToDoActivity.noteKey";
     static String noteEditExtra = "com.example.productivity.ToDoActivity.noteEdit";
     static String noteReturnExtra = "com.example.productivity.ToDoActivity.noteReturn";
     private int requestCodeEditNote = 1;
 
+    private final String todoKey = "com.example.productivity.ToDoActivity.todoKey";
     static String todoEditExtra = "com.example.productivity.ToDoActivity.todoEdit";
     static String todoReturnExtra = "com.example.productivity.ToDoActivity.todoReturn";
     private int requestCodeEditTodo = 2;
@@ -54,18 +55,60 @@ public class ToDoActivity extends AppCompatActivity implements NotesAdapter.Item
         setTitle(R.string.todo);
         setContentView(R.layout.activity_notes);
 
-        todoList = new ArrayList<>();
-        todoList.add(new Todo("Title1", "Body1Body1Body1Body1Body1"));
-        todoList.add(new Todo("Title2", "Body1Body1Body1Body1Body2"));
-        todoList.add(new Todo("Title3", "Body1Body1Body1Body1Body3"));
-        todoList.add(new Todo("Title4", "Body1Body1Body1Body1Body4"));
-        todoList.add(new Todo("Title5", "Body1Body1Body1Body1Body5"));
-        todoList.add(new Todo("Title6", "Body1Body1Body1Body1Body6"));
-        todoList.add(new Todo("Title7", "Body1Body1Body1Body1Body7"));
-        todoList.add(new Todo("Title8", "Body1Body1Body1Body1Body8"));
-        todoList.add(new Todo("Title9", "Body1Body1Body1Body1Body9"));
-        todoList.add(new Todo("Title10", "Body1Body1Body1Body1Body10"));
+        readData();
 
+        initializeAdapters();
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        Intent intent = new Intent(this, EditNoteActivity.class);
+        int requestCode = 0;
+
+        if (view.getId() == R.id.notes) {
+
+            requestCode = requestCodeEditNote;
+            noteEdited = position;
+            intent.putExtra(editType, editTypeNote);
+            intent.putExtra(noteEditExtra, noteList.get(noteEdited));
+
+        } else if (view.getId() == R.id.todoImageView) {
+
+            requestCode = requestCodeEditTodo;
+            todoEdited = position;
+            intent.putExtra(editType, editTypeTodo);
+            if (position == todoList.size()) {
+                todoList.add(new Todo("", ""));
+                intent.putExtra(todoEditExtra, todoList.get(position));
+            } else {
+                intent.putExtra(todoEditExtra, todoList.get(todoEdited));
+            }
+        }
+
+        startActivityForResult(intent, requestCode);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (resultCode == RESULT_OK) {
+
+            if (requestCode == requestCodeEditNote) {
+
+                noteList.remove(noteEdited);
+                noteList.add(0, (Note) data.getExtras().get(noteReturnExtra));
+                notesAdapter.notifyDataSetChanged();
+                writeNotes();
+
+            } else if (requestCode == requestCodeEditTodo) {
+                
+                todoList.set(todoEdited, (Todo) data.getExtras().get(todoReturnExtra));
+                todoAdapter.notifyItemChanged(todoEdited);
+                writeTodos();
+            }
+        }
+    }
+
+    private void initializeAdapters() {
         todoView = findViewById(R.id.todo);
         todoView.setHasFixedSize(true);
 
@@ -74,23 +117,6 @@ public class ToDoActivity extends AppCompatActivity implements NotesAdapter.Item
         todoView.setLayoutManager(new LinearLayoutManager(this));
         todoView.addItemDecoration(new VerticalSpaceItemDecoration(20));
         todoView.setAdapter(todoAdapter);
-
-        //SharedPreferences settings = getApplicationContext().getSharedPreferences(key, 0);
-        //String todoString = settings.getString(key, "");
-
-
-
-        noteList = new ArrayList<>();
-        noteList.add(new Note("Test1", "BodyBodyBodyBodyBodyBodyBody"));
-        noteList.add(new Note("Test2", "BodyBodyBodyBodyBodyBodyBody"));
-        noteList.add(new Note("Test3", "BodyBodyBodyBodyBodyBodyBody"));
-        noteList.add(new Note("Test4", "BodyBodyBodyBodyBodyBodyBody"));
-        noteList.add(new Note("Test5", "BodyBodyBodyBodyBodyBodyBody"));
-        noteList.add(new Note("Test6", "BodyBodyBodyBodyBodyBodyBody"));
-        noteList.add(new Note("Test7", "BodyBodyBodyBodyBodyBodyBody"));
-        noteList.add(new Note("Test8", "BodyBodyBodyBodyBodyBodyBody"));
-        noteList.add(new Note("Test9", "BodyBodyBodyBodyBodyBodyBody"));
-        noteList.add(new Note("Test10", "BodyBodyBodyBodyBodyBodyBody"));
 
         notesView = findViewById(R.id.notes);
         notesView.setHasFixedSize(true);
@@ -102,40 +128,26 @@ public class ToDoActivity extends AppCompatActivity implements NotesAdapter.Item
         notesView.setAdapter(notesAdapter);
     }
 
-//        SharedPreferences settings = getApplicationContext().getSharedPreferences(key, 0);
-//        SharedPreferences.Editor editor = settings.edit();
-//        editor.putString(key, todoString);
-//        editor.apply();
+    private void readData() {
+        todoList = (ArrayList<Todo>) MainActivity.store.read(todoKey);
 
-    @Override
-    public void onItemClick(View view, int position) {
-        if (view.getId() == R.id.notes) {
-            Intent intent = new Intent(this, EditNoteActivity.class);
-            noteEdited = position;
-            intent.putExtra(editType, editTypeNote);
-            intent.putExtra(noteEditExtra, noteList.get(noteEdited));
-            startActivityForResult(intent, requestCodeEditNote);
-        } else if (view.getId() == R.id.todoImageView) {
-            Intent intent = new Intent(this, EditNoteActivity.class);
-            todoEdited = position;
-            intent.putExtra(editType, editTypeTodo);
-            intent.putExtra(todoEditExtra, todoList.get(todoEdited));
-            startActivityForResult(intent, requestCodeEditTodo);
+        if (todoList == null) {
+            todoList = new ArrayList<>();
+        }
+
+        noteList = (ArrayList<Note>) MainActivity.store.read(noteKey);
+
+        if (noteList == null) {
+            noteList = new ArrayList<>();
         }
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == requestCodeEditNote) {
-            if (resultCode == RESULT_OK) {
-                noteList.remove(noteEdited);
-                noteList.add(0, (Note) data.getExtras().get(noteReturnExtra));
-                notesAdapter.notifyDataSetChanged();
-            }
-        } else if (requestCode == requestCodeEditTodo) {
-            if (resultCode == RESULT_OK) {
-                todoList.set(todoEdited, (Todo) data.getExtras().get(todoReturnExtra));
-                todoAdapter.notifyItemChanged(todoEdited);
-            }
-        }
+    private void writeTodos() {
+        MainActivity.store.write(todoKey, todoList);
+    }
+
+    private void writeNotes() {
+        MainActivity.store.write(noteKey, noteList);
+
     }
 }

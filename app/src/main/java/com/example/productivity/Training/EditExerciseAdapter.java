@@ -29,7 +29,6 @@ public class EditExerciseAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         this.exercises = data;
     }
 
-
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         if (viewType == TYPE_END) {
@@ -39,7 +38,6 @@ public class EditExerciseAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             View view = mInflater.inflate(R.layout.element_exercise_edit, viewGroup, false);
             return new EditExerciseViewHolder(view);
         }
-
     }
 
     @Override
@@ -51,7 +49,6 @@ public class EditExerciseAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((EditExerciseAdapter.EditExerciseViewHolder) viewHolder).name.setText(exercise.getName());
             ((EditExerciseAdapter.EditExerciseViewHolder) viewHolder).sets.setText(exercise.getSets());
         }
-
     }
 
     // total number of rows
