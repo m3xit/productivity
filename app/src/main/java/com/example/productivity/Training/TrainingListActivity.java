@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.productivity.R;
+import com.example.productivity.stuff.VerticalSpaceItemDecoration;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.FileInputStream;
@@ -113,19 +114,3 @@ public class TrainingListActivity extends AppCompatActivity implements TrainingL
     }
 }
 
-class VerticalSpaceItemDecoration extends RecyclerView.ItemDecoration {
-
-    private final int verticalSpaceHeight;
-
-    VerticalSpaceItemDecoration(int verticalSpaceHeight) {
-        this.verticalSpaceHeight = verticalSpaceHeight;
-    }
-
-    @Override
-    public void getItemOffsets(Rect outRect, View view, RecyclerView parent,
-                               RecyclerView.State state) {
-        if (parent.getChildAdapterPosition(view) != parent.getAdapter().getItemCount() - 1) {
-            outRect.bottom = verticalSpaceHeight;
-        }
-    }
-}

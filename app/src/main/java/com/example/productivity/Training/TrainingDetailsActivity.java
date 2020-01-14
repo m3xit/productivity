@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.productivity.R;
+import com.example.productivity.stuff.HorizontalSpaceItemDecoration;
 
 import java.util.List;
 
@@ -70,22 +71,5 @@ public class TrainingDetailsActivity extends AppCompatActivity implements Exerci
         }
 
         titleView.setText(title);
-    }
-}
-
-class HorizontalSpaceItemDecoration extends RecyclerView.ItemDecoration {
-
-    private final int horizontalSpaceHeight;
-
-    public HorizontalSpaceItemDecoration(int horizontalSpaceHeight) {
-        this.horizontalSpaceHeight = horizontalSpaceHeight;
-    }
-
-    @Override
-    public void getItemOffsets(Rect outRect, View view, RecyclerView parent,
-                               RecyclerView.State state) {
-        if (parent.getChildAdapterPosition(view) != parent.getAdapter().getItemCount() - 1) {
-            outRect.right = horizontalSpaceHeight;
-        }
     }
 }
