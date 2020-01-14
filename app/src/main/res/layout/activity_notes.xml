@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/darkBackground"
-    tools:context=".Notes.ToDoActivity">
+    tools:context=".Notes.NotesActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/todo"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@drawable/rounded_layout"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/big_margin"
         android:layout_marginBottom="8dp"
         android:padding="@dimen/standart_margin"
         app:layout_constraintBottom_toTopOf="@+id/notes"
@@ -25,7 +25,7 @@
         android:id="@+id/notes"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/big_margin"
         android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@+id/todo"
         app:layout_constraintEnd_toEndOf="parent"

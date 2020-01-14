@@ -16,11 +16,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
     private List<Note> notes;
     private NotesAdapter.ItemClickListener mClickListener;
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
     public class NotesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        // each data item is just a string in this case
         public TextView title;
         public TextView body;
         public NotesViewHolder(View v) {
@@ -49,14 +45,18 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
 
     @Override
     public void onBindViewHolder(NotesViewHolder holder, int position) {
-        holder.title.setText(notes.get(position).getTitle());
-        holder.body.setText(notes.get(position).getBody());
 
+        if (position == getItemCount()-1) {
+            //EndViewHolder
+        } else {
+            holder.title.setText(notes.get(position).getTitle());
+            holder.body.setText(notes.get(position).getBody());
+        }
     }
 
     @Override
     public int getItemCount() {
-        return notes.size();
+        return notes.size()+1;
     }
 
     void setClickListener(NotesAdapter.ItemClickListener itemClickListener) {

@@ -17,35 +17,34 @@
         <activity
             android:name=".Training.EditTrainingActivity"/>
         <activity
-            android:name=".Notes.EditNoteActivity"
-            android:parentActivityName=".Notes.ToDoActivity" />
+            android:name=".Notes.EditNoteActivity"/>
         <activity
             android:name=".Calendar.NewAppointmentActivity"
-            android:parentActivityName=".Calendar.WeekPlanActivity" />
+            android:parentActivityName=".Calendar.WeekPlanActivity"/>
         <activity
             android:name=".Timer.TimerActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".Training.TrainingDetailsActivity"
-            android:parentActivityName=".Training.TrainingListActivity" />
+            android:parentActivityName=".Training.TrainingListActivity"/>
         <activity
             android:name=".Training.NewTrainingActivity"
-            android:parentActivityName=".Training.TrainingListActivity" />
+            android:parentActivityName=".Training.TrainingListActivity"/>
         <activity
             android:name=".Training.TrainingListActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".Calendar.WeekPlanActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"/>
         <activity
-            android:name=".Notes.ToDoActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name=".Notes.NotesActivity"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 

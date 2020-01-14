@@ -1,6 +1,5 @@
 package com.example.productivity;
 
-import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.ComponentName;
 import android.content.Context;
@@ -11,15 +10,11 @@ import android.hardware.camera2.CameraManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.example.productivity.Calendar.WeekPlanActivity;
-import com.example.productivity.Notes.ToDoActivity;
+import com.example.productivity.Notes.NotesActivity;
 import com.example.productivity.Timer.TimerActivity;
 import com.example.productivity.Training.TrainingListActivity;
 import com.example.productivity.stuff.SaveData;
@@ -45,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("ID: " + view.getId());
         switch (view.getId()) {
             case R.id.button_todo:
-                Intent intent_todo = new Intent(this, ToDoActivity.class);
+                Intent intent_todo = new Intent(this, NotesActivity.class);
                 startActivity(intent_todo);
                 break;
             case R.id.button_training:

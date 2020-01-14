@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.View;
 import com.example.productivity.MainActivity;
 import com.example.productivity.R;
@@ -15,7 +16,7 @@ import com.example.productivity.stuff.VerticalSpaceItemDecoration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ToDoActivity extends AppCompatActivity implements NotesAdapter.ItemClickListener, TodoAdapter.ItemClickListener {
+public class NotesActivity extends AppCompatActivity implements NotesAdapter.ItemClickListener, TodoAdapter.ItemClickListener, TodoAdapter.TextWatcher {
 
     private RecyclerView notesView;
     private RecyclerView todoView;
@@ -26,18 +27,18 @@ public class ToDoActivity extends AppCompatActivity implements NotesAdapter.Item
     private TodoAdapter todoAdapter;
     private List<Todo> todoList;
 
-    static String editType = "com.example.productivity.ToDoActivity.editType";
+    static String editType = "com.example.productivity.NotesActivity.editType";
     static int editTypeNote = 0;
     static int editTypeTodo = 1;
 
-    private final String noteKey = "com.example.productivity.ToDoActivity.noteKey";
-    static String noteEditExtra = "com.example.productivity.ToDoActivity.noteEdit";
-    static String noteReturnExtra = "com.example.productivity.ToDoActivity.noteReturn";
+    private final String noteKey = "com.example.productivity.NotesActivity.noteKey";
+    static String noteEditExtra = "com.example.productivity.NotesActivity.noteEdit";
+    static String noteReturnExtra = "com.example.productivity.NotesActivity.noteReturn";
     private int requestCodeEditNote = 1;
 
-    private final String todoKey = "com.example.productivity.ToDoActivity.todoKey";
-    static String todoEditExtra = "com.example.productivity.ToDoActivity.todoEdit";
-    static String todoReturnExtra = "com.example.productivity.ToDoActivity.todoReturn";
+    private final String todoKey = "com.example.productivity.NotesActivity.todoKey";
+    static String todoEditExtra = "com.example.productivity.NotesActivity.todoEdit";
+    static String todoReturnExtra = "com.example.productivity.NotesActivity.todoReturn";
     private int requestCodeEditTodo = 2;
 
     private int noteEdited = 0;
@@ -64,7 +65,12 @@ public class ToDoActivity extends AppCompatActivity implements NotesAdapter.Item
             requestCode = requestCodeEditNote;
             noteEdited = position;
             intent.putExtra(editType, editTypeNote);
-            intent.putExtra(noteEditExtra, noteList.get(noteEdited));
+            if (position == noteList.size()) {
+                noteList.add(new Note("", ""));
+                intent.putExtra(noteEditExtra, noteList.get(position));
+            } else {
+                intent.putExtra(noteEditExtra, noteList.get(noteEdited));
+            }
 
         } else if (view.getId() == R.id.todoImageView) {
 
@@ -107,6 +113,7 @@ public class ToDoActivity extends AppCompatActivity implements NotesAdapter.Item
         todoView.setHasFixedSize(true);
         todoAdapter = new TodoAdapter(todoList);
         todoAdapter.setClickListener(this);
+        todoAdapter.setTextWatcher(this);
         todoView.setLayoutManager(new LinearLayoutManager(this));
         todoView.addItemDecoration(new VerticalSpaceItemDecoration(20));
         todoView.setAdapter(todoAdapter);
@@ -140,6 +147,28 @@ public class ToDoActivity extends AppCompatActivity implements NotesAdapter.Item
 
     private void writeNotes() {
         MainActivity.store.write(noteKey, noteList);
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s, int position) {
+        System.out.println(position + "*************************************");
+        if (position == todoList.size()) {
+            todoList.add(new Todo(s.toString(), ""));
+        } else {
+            todoList.set(position, new Todo(s.toString(), todoList.get(position).getBody()));
+        }
+//        todoAdapter.notifyDataSetChanged();
+        writeTodos();
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
     }
 }

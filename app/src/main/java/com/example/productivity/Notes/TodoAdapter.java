@@ -1,40 +1,60 @@
 package com.example.productivity.Notes;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.productivity.R;
-import com.example.productivity.Training.EditExerciseAdapter;
-import com.example.productivity.Training.Exercise;
 
 import java.util.List;
 
 public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder> {
     private List<Todo> todoList;
-    private TodoAdapter.ItemClickListener mClickListener;
-    private int TYPE_TODO = 0;
-    private int TYPE_END = 1;
+    private TodoAdapter.ItemClickListener clickListener;
+    private TextWatcher textWatcher;
+    private final int TYPE_TODO = 0;
+    private final int TYPE_END = 1;
 
-    public class TodoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView title;
-        public ImageView image;
-        public TodoViewHolder(View v) {
+    public class TodoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, android.text.TextWatcher {
+        EditText title;
+        ImageView image;
+
+        TodoViewHolder(View v) {
             super(v);
             title = v.findViewById(R.id.title);
+
+            title.addTextChangedListener(this);
+
             image = v.findViewById(R.id.todoImageView);
             image.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+            if (clickListener != null) clickListener.onItemClick(view, getAdapterPosition());
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            if (textWatcher != null) textWatcher.beforeTextChanged(s, start, count, after);
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if (textWatcher != null) textWatcher.onTextChanged(s, start, before, count);
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            if (textWatcher != null) textWatcher.afterTextChanged(s, getAdapterPosition());
         }
     }
 
-    public TodoAdapter(List<Todo> todoList) {
+    TodoAdapter(List<Todo> todoList) {
         this.todoList = todoList;
     }
 
@@ -59,11 +79,21 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
     }
 
     void setClickListener(TodoAdapter.ItemClickListener itemClickListener) {
-        this.mClickListener = itemClickListener;
+        this.clickListener = itemClickListener;
+    }
+
+    void setTextWatcher(TextWatcher textWatcher) {
+        this.textWatcher = textWatcher;
     }
 
     public interface ItemClickListener {
         void onItemClick(View view, int position);
+    }
+
+    public interface TextWatcher {
+        void afterTextChanged(Editable s, int position);
+        void onTextChanged(CharSequence s, int start, int before, int count);
+        void beforeTextChanged(CharSequence s, int start, int count, int after);
     }
 
     @Override
