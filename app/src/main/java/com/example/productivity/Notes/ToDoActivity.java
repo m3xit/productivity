@@ -2,6 +2,7 @@ package com.example.productivity.Notes;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -12,24 +13,40 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.productivity.R;
+import com.example.productivity.stuff.GridSpacingItemDecoration;
+import com.example.productivity.stuff.HorizontalSpaceItemDecoration;
+import com.example.productivity.stuff.VerticalSpaceItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ToDoActivity extends AppCompatActivity implements NotesAdapter.ItemClickListener {
+public class ToDoActivity extends AppCompatActivity implements NotesAdapter.ItemClickListener, TodoAdapter.ItemClickListener {
 
-    private EditText todoText;
     private RecyclerView notesView;
+    private RecyclerView todoView;
 
-    private NotesAdapter adapter;
-    private List<Note> notes;
+    private NotesAdapter notesAdapter;
+    private List<Note> noteList;
 
-    private static String key = "com.example.productivity.todoString";
-    static String noteEditExtra = "com.example.productivity.noteEdit";
-    static String noteReturnExtra = "com.example.productivity.noteReturn";
+    private TodoAdapter todoAdapter;
+    private List<Todo> todoList;
 
+    private static String key = "com.example.productivity.ToDoActivity.todoString";
+
+    static String editType = "com.example.productivity.ToDoActivity.editType";
+    static int editTypeNote = 0;
+    static int editTypeTodo = 1;
+
+    static String noteEditExtra = "com.example.productivity.ToDoActivity.noteEdit";
+    static String noteReturnExtra = "com.example.productivity.ToDoActivity.noteReturn";
     private int requestCodeEditNote = 1;
+
+    static String todoEditExtra = "com.example.productivity.ToDoActivity.todoEdit";
+    static String todoReturnExtra = "com.example.productivity.ToDoActivity.todoReturn";
+    private int requestCodeEditTodo = 2;
+
     private int noteEdited = 0;
+    private int todoEdited = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,118 +54,87 @@ public class ToDoActivity extends AppCompatActivity implements NotesAdapter.Item
         setTitle(R.string.todo);
         setContentView(R.layout.activity_notes);
 
-        todoText = findViewById(R.id.todo_text);
+        todoList = new ArrayList<>();
+        todoList.add(new Todo("Title1", "Body1Body1Body1Body1Body1"));
+        todoList.add(new Todo("Title2", "Body1Body1Body1Body1Body2"));
+        todoList.add(new Todo("Title3", "Body1Body1Body1Body1Body3"));
+        todoList.add(new Todo("Title4", "Body1Body1Body1Body1Body4"));
+        todoList.add(new Todo("Title5", "Body1Body1Body1Body1Body5"));
+        todoList.add(new Todo("Title6", "Body1Body1Body1Body1Body6"));
+        todoList.add(new Todo("Title7", "Body1Body1Body1Body1Body7"));
+        todoList.add(new Todo("Title8", "Body1Body1Body1Body1Body8"));
+        todoList.add(new Todo("Title9", "Body1Body1Body1Body1Body9"));
+        todoList.add(new Todo("Title10", "Body1Body1Body1Body1Body10"));
 
-        SharedPreferences settings = getApplicationContext().getSharedPreferences(key, 0);
-        String todoString = settings.getString(key, "");
-        String input = "";
+        todoView = findViewById(R.id.todo);
+        todoView.setHasFixedSize(true);
 
-        if (todoString != "null") {
-            input = todoString;
-            todoString = "";
-        }
+        todoAdapter = new TodoAdapter(todoList);
+        todoAdapter.setClickListener(this);
+        todoView.setLayoutManager(new LinearLayoutManager(this));
+        todoView.addItemDecoration(new VerticalSpaceItemDecoration(20));
+        todoView.setAdapter(todoAdapter);
 
-        for(String s : input.split("\n")) {
-            if (s.length() > 0 && !s.substring(0, 1).equals("\u2022")) {
-                System.out.println(s.substring(0, 1));
-                todoString += "\u2022 " + s + "\n";
-            } else {
-                todoString += s + "\n";
-            }
-        }
+        //SharedPreferences settings = getApplicationContext().getSharedPreferences(key, 0);
+        //String todoString = settings.getString(key, "");
 
-        todoString = todoString.substring(0, todoString.length()-1);
 
-        if (!todoString.endsWith("\u2022 ")) {
-            todoString += "\n\u2022 ";
-        }
 
-        todoText.setText(todoString);
-
-        notes = new ArrayList<>();
-        notes.add(new Note("Test1", "BodyBodyBodyBodyBodyBodyBody"));
-        notes.add(new Note("Test2", "BodyBodyBodyBodyBodyBodyBody"));
-        notes.add(new Note("Test3", "BodyBodyBodyBodyBodyBodyBody"));
-        notes.add(new Note("Test4", "BodyBodyBodyBodyBodyBodyBody"));
-        notes.add(new Note("Test5", "BodyBodyBodyBodyBodyBodyBody"));
-        notes.add(new Note("Test6", "BodyBodyBodyBodyBodyBodyBody"));
-        notes.add(new Note("Test7", "BodyBodyBodyBodyBodyBodyBody"));
-        notes.add(new Note("Test8", "BodyBodyBodyBodyBodyBodyBody"));
-        notes.add(new Note("Test9", "BodyBodyBodyBodyBodyBodyBody"));
-        notes.add(new Note("Test10", "BodyBodyBodyBodyBodyBodyBody"));
+        noteList = new ArrayList<>();
+        noteList.add(new Note("Test1", "BodyBodyBodyBodyBodyBodyBody"));
+        noteList.add(new Note("Test2", "BodyBodyBodyBodyBodyBodyBody"));
+        noteList.add(new Note("Test3", "BodyBodyBodyBodyBodyBodyBody"));
+        noteList.add(new Note("Test4", "BodyBodyBodyBodyBodyBodyBody"));
+        noteList.add(new Note("Test5", "BodyBodyBodyBodyBodyBodyBody"));
+        noteList.add(new Note("Test6", "BodyBodyBodyBodyBodyBodyBody"));
+        noteList.add(new Note("Test7", "BodyBodyBodyBodyBodyBodyBody"));
+        noteList.add(new Note("Test8", "BodyBodyBodyBodyBodyBodyBody"));
+        noteList.add(new Note("Test9", "BodyBodyBodyBodyBodyBodyBody"));
+        noteList.add(new Note("Test10", "BodyBodyBodyBodyBodyBodyBody"));
 
         notesView = findViewById(R.id.notes);
         notesView.setHasFixedSize(true);
 
-        adapter = new NotesAdapter(notes);
-        adapter.setClickListener(this);
+        notesAdapter = new NotesAdapter(noteList);
+        notesAdapter.setClickListener(this);
         notesView.setLayoutManager(new GridLayoutManager(this, 2));
         notesView.addItemDecoration(new GridSpacingItemDecoration(2, 20, false));
-        notesView.setAdapter(adapter);
+        notesView.setAdapter(notesAdapter);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        String todoString = todoText.getText().toString();
-
-        SharedPreferences settings = getApplicationContext().getSharedPreferences(key, 0);
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putString(key, todoString);
-        editor.apply();
-    }
+//        SharedPreferences settings = getApplicationContext().getSharedPreferences(key, 0);
+//        SharedPreferences.Editor editor = settings.edit();
+//        editor.putString(key, todoString);
+//        editor.apply();
 
     @Override
     public void onItemClick(View view, int position) {
-        System.out.println(position + "''''''''''''''''''''''''''''''''");
-        Intent intent = new Intent(this, EditNoteActivity.class);
-        noteEdited = position;
-        intent.putExtra(noteEditExtra, notes.get(noteEdited));
-        startActivityForResult(intent, requestCodeEditNote);
+        if (view.getId() == R.id.notes) {
+            Intent intent = new Intent(this, EditNoteActivity.class);
+            noteEdited = position;
+            intent.putExtra(editType, editTypeNote);
+            intent.putExtra(noteEditExtra, noteList.get(noteEdited));
+            startActivityForResult(intent, requestCodeEditNote);
+        } else if (view.getId() == R.id.todoImageView) {
+            Intent intent = new Intent(this, EditNoteActivity.class);
+            todoEdited = position;
+            intent.putExtra(editType, editTypeTodo);
+            intent.putExtra(todoEditExtra, todoList.get(todoEdited));
+            startActivityForResult(intent, requestCodeEditTodo);
+        }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == requestCodeEditNote) {
             if (resultCode == RESULT_OK) {
-                notes.remove(noteEdited);
-                notes.add(0, (Note) data.getExtras().get(noteReturnExtra));
-                adapter.notifyDataSetChanged();
+                noteList.remove(noteEdited);
+                noteList.add(0, (Note) data.getExtras().get(noteReturnExtra));
+                notesAdapter.notifyDataSetChanged();
             }
-        }
-    }
-}
-
-class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
-
-    private int spanCount;
-    private int spacing;
-    private boolean includeEdge;
-
-    public GridSpacingItemDecoration(int spanCount, int spacing, boolean includeEdge) {
-        this.spanCount = spanCount;
-        this.spacing = spacing;
-        this.includeEdge = includeEdge;
-    }
-
-    @Override
-    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-        int position = parent.getChildAdapterPosition(view); // item position
-        int column = position % spanCount; // item column
-
-        if (includeEdge) {
-            outRect.left = spacing - column * spacing / spanCount; // spacing - column * ((1f / spanCount) * spacing)
-            outRect.right = (column + 1) * spacing / spanCount; // (column + 1) * ((1f / spanCount) * spacing)
-
-            if (position < spanCount) { // top edge
-                outRect.top = spacing;
-            }
-            outRect.bottom = spacing; // item bottom
-        } else {
-            outRect.left = column * spacing / spanCount; // column * ((1f / spanCount) * spacing)
-            outRect.right = spacing - (column + 1) * spacing / spanCount; // spacing - (column + 1) * ((1f /    spanCount) * spacing)
-            if (position >= spanCount) {
-                outRect.top = spacing; // item top
+        } else if (requestCode == requestCodeEditTodo) {
+            if (resultCode == RESULT_OK) {
+                todoList.set(todoEdited, (Todo) data.getExtras().get(todoReturnExtra));
+                todoAdapter.notifyItemChanged(todoEdited);
             }
         }
     }

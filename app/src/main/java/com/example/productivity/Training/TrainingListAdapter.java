@@ -113,7 +113,7 @@ public class TrainingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         ClimbingViewHolder(View view) {
             super(view);
-            ImageView image = view.findViewById(R.id.imageView);
+            ImageView image = view.findViewById(R.id.todoImageView);
             image.setImageResource(R.drawable.ic_terrain_black_24dp);
         }
     }
@@ -122,7 +122,7 @@ public class TrainingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         OtherViewHolder(View view) {
             super(view);
-            ImageView image = view.findViewById(R.id.imageView);
+            ImageView image = view.findViewById(R.id.todoImageView);
             image.setImageResource(R.drawable.ic_add_black_24dp);
         }
     }

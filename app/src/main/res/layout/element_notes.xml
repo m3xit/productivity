@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/standart_margin"
-    android:background="@drawable/rounded_layout">
+    android:background="@drawable/rounded_layout"
+    android:id="@+id/notes">
 
     <TextView
         android:id="@+id/title"
