@@ -4,18 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
-
 import com.example.productivity.MainActivity;
 import com.example.productivity.R;
 import com.example.productivity.stuff.GridSpacingItemDecoration;
-import com.example.productivity.stuff.HorizontalSpaceItemDecoration;
 import com.example.productivity.stuff.VerticalSpaceItemDecoration;
 
 import java.util.ArrayList;
@@ -100,7 +94,7 @@ public class ToDoActivity extends AppCompatActivity implements NotesAdapter.Item
                 writeNotes();
 
             } else if (requestCode == requestCodeEditTodo) {
-                
+
                 todoList.set(todoEdited, (Todo) data.getExtras().get(todoReturnExtra));
                 todoAdapter.notifyItemChanged(todoEdited);
                 writeTodos();
@@ -111,7 +105,6 @@ public class ToDoActivity extends AppCompatActivity implements NotesAdapter.Item
     private void initializeAdapters() {
         todoView = findViewById(R.id.todo);
         todoView.setHasFixedSize(true);
-
         todoAdapter = new TodoAdapter(todoList);
         todoAdapter.setClickListener(this);
         todoView.setLayoutManager(new LinearLayoutManager(this));
@@ -120,7 +113,6 @@ public class ToDoActivity extends AppCompatActivity implements NotesAdapter.Item
 
         notesView = findViewById(R.id.notes);
         notesView.setHasFixedSize(true);
-
         notesAdapter = new NotesAdapter(noteList);
         notesAdapter.setClickListener(this);
         notesView.setLayoutManager(new GridLayoutManager(this, 2));

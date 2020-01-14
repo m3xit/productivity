@@ -11,14 +11,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.productivity.MainActivity;
 import com.example.productivity.R;
 import com.example.productivity.stuff.VerticalSpaceItemDecoration;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,9 +23,13 @@ public class TrainingListActivity extends AppCompatActivity implements TrainingL
     TrainingListAdapter adapter;
     List<Training> trainings;
     RecyclerView recyclerView;
+
     static int requestCodeNewTraining = 1;
-    public static String TrainingCreateExtra = "com.example.productivity.TrainingCreateExtra";
-    public static String TrainingViewExtra = "com.example.productivity.TrainingViewExtra";
+
+    public static String TrainingCreateExtra = "com.example.productivity.TrainingListActivity.TrainingCreateExtra";
+    public static String TrainingViewExtra = "com.example.productivity.TrainingListActivity.TrainingViewExtra";
+
+    private final String trainingsKey = "com.example.productivity.TrainingListActivity.trainingKey";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,14 +50,7 @@ public class TrainingListActivity extends AppCompatActivity implements TrainingL
 
         readTrainings();
 
-        recyclerView = findViewById(R.id.list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new TrainingListAdapter(this, trainings);
-        adapter.setClickListener(this);
-        adapter.setLongClickListener(this);
-        recyclerView.setAdapter(adapter);
-
-        recyclerView.addItemDecoration(new VerticalSpaceItemDecoration(20));
+        initializeAdapters();
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -80,28 +73,27 @@ public class TrainingListActivity extends AppCompatActivity implements TrainingL
         startActivity(intent);
     }
 
+    private void initializeAdapters() {
+        recyclerView = findViewById(R.id.list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new TrainingListAdapter(this, trainings);
+        adapter.setClickListener(this);
+        adapter.setLongClickListener(this);
+        recyclerView.setAdapter(adapter);
+
+        recyclerView.addItemDecoration(new VerticalSpaceItemDecoration(20));
+    }
+
     private void readTrainings() {
-        try {
-            FileInputStream fis = this.openFileInput("trainings");
-            ObjectInputStream is = new ObjectInputStream(fis);
-            trainings = (List<Training>) is.readObject();
-            is.close();
-            fis.close();
-        } catch (Exception e) {
-            System.out.println(e.toString());
+        trainings = (List<Training>) MainActivity.store.read(trainingsKey);
+
+        if (trainings == null) {
+            trainings = new ArrayList<>();
         }
     }
 
     private void writeTrainings() {
-        try {
-            FileOutputStream fos = this.openFileOutput("trainings", Context.MODE_PRIVATE);
-            ObjectOutputStream os = new ObjectOutputStream(fos);
-            os.writeObject(trainings);
-            os.close();
-            fos.close();
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        }
+        MainActivity.store.write(trainingsKey, trainings);
     }
 
     @Override
