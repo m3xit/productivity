@@ -99,6 +99,8 @@ public class NotesActivity extends AppCompatActivity implements NotesAdapter.Ite
             doneList.remove(position);
 
             doneAdapter.notifyDataSetChanged();
+
+            writeDone();
         }
     }
 
@@ -189,25 +191,23 @@ public class NotesActivity extends AppCompatActivity implements NotesAdapter.Ite
 
         if (type == TodoAdapter.TYPE) {
             if (position == todoList.size()) {
-                todoList.add(new Todo(s.toString(), ""));
+                //todoList.add(new Todo(s.toString(), ""));
             } else {
-                todoList.set(position, new Todo(s.toString(), todoList.get(position).getBody()));
+                String title = todoList.get(position).getTitle();
+                if (!title.equals(s.toString())) {
+                    todoList.set(position, new Todo(s.toString(), todoList.get(position).getBody()));
+                    todoAdapter.notifyItemChanged(position);
+                    writeTodos();
+                }
             }
-//        todoAdapter.notifyDataSetChanged();
-            writeTodos();
         }
-
     }
 
     @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-    }
+    public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
     @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-    }
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked, int position, int type) {
@@ -222,7 +222,6 @@ public class NotesActivity extends AppCompatActivity implements NotesAdapter.Ite
                 buttonView.setChecked(false);
                 todoAdapter.setCheckListener(this);
             }
-
         } else if (type == DoneAdapter.TYPE){
             todoList.add(doneList.remove(position));
 

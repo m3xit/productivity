@@ -1,5 +1,6 @@
 package com.example.productivity.Notes;
 
+import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +31,8 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
         TodoViewHolder(View v) {
             super(v);
             title = v.findViewById(R.id.title);
-            title.addTextChangedListener(this);
+            title.setFocusable(false);
+            //title.addTextChangedListener(this);
 
             image = v.findViewById(R.id.todoImageView);
             image.setOnClickListener(this);
@@ -84,7 +86,8 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
     @Override
     public void onBindViewHolder(TodoViewHolder holder, int position) {
         if (position == getItemCount()-1) {
-            //EndViewHolder
+            holder.image.setImageResource(R.drawable.ic_add_black_24dp);
+            System.out.println(position + "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP");
         } else {
             holder.title.setText(todoList.get(position).getTitle());
         }

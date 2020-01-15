@@ -39,7 +39,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/lighterBackground"
                 android:padding="@dimen/standart_margin"
-                android:nestedScrollingEnabled="false"/>
+                android:nestedScrollingEnabled="false"
+                android:cursorVisible="false"/>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

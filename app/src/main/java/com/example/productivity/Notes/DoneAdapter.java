@@ -31,7 +31,8 @@ public class DoneAdapter extends RecyclerView.Adapter<DoneAdapter.DoneViewHolder
         DoneViewHolder(View v) {
             super(v);
             title = v.findViewById(R.id.title);
-            title.addTextChangedListener(this);
+            title.setFocusable(false);
+            //title.addTextChangedListener(this);
 
             image = v.findViewById(R.id.todoImageView);
             image.setImageResource(R.drawable.ic_clear_black_24dp);
