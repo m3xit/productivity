@@ -1,7 +1,6 @@
 package com.example.productivity.Notes;
 
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,30 +8,31 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.productivity.R;
 
 import java.util.List;
 
-public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder> {
+public class DoneAdapter extends RecyclerView.Adapter<DoneAdapter.DoneViewHolder> {
     private List<Todo> todoList;
-    private TodoAdapter.ItemClickListener clickListener;
+    private DoneAdapter.ItemClickListener clickListener;
     private TextWatcher textWatcher;
     private OnCheckedChangeListener checkListener;
-    private final int TYPE_TODO = 0;
-    private final int TYPE_END = 1;
 
-    public class TodoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, android.text.TextWatcher, CompoundButton.OnCheckedChangeListener {
+    public class DoneViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, android.text.TextWatcher, CompoundButton.OnCheckedChangeListener {
         EditText title;
         ImageView image;
         CheckBox checkBox;
 
-        TodoViewHolder(View v) {
+        DoneViewHolder(View v) {
             super(v);
             title = v.findViewById(R.id.title);
             title.addTextChangedListener(this);
 
             image = v.findViewById(R.id.todoImageView);
+            image.setImageResource(R.drawable.ic_clear_black_24dp);
             image.setOnClickListener(this);
 
             checkBox = v.findViewById(R.id.checkBox);
@@ -65,23 +65,19 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
         }
     }
 
-    TodoAdapter(List<Todo> todoList) {
+    DoneAdapter(List<Todo> todoList) {
         this.todoList = todoList;
     }
 
     @Override
-    public TodoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public DoneAdapter.DoneViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.element_todo, parent, false);
-        return new TodoViewHolder(view);
+        return new DoneAdapter.DoneViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(TodoViewHolder holder, int position) {
-        if (position == getItemCount()-1) {
-            //EndViewHolder
-        } else {
-            holder.title.setText(todoList.get(position).getTitle());
-        }
+    public void onBindViewHolder(DoneAdapter.DoneViewHolder holder, int position) {
+        holder.title.setText(todoList.get(position).getTitle());
     }
 
     @Override
@@ -89,15 +85,15 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
         return todoList.size()+1;
     }
 
-    void setClickListener(TodoAdapter.ItemClickListener itemClickListener) {
+    void setClickListener(DoneAdapter.ItemClickListener itemClickListener) {
         this.clickListener = itemClickListener;
     }
 
-    void setTextWatcher(TextWatcher textWatcher) {
+    void setTextWatcher(DoneAdapter.TextWatcher textWatcher) {
         this.textWatcher = textWatcher;
     }
 
-    void setCheckListener(OnCheckedChangeListener listener) {
+    void setCheckListener(DoneAdapter.OnCheckedChangeListener listener) {
         this.checkListener = listener;
     }
 
@@ -113,14 +109,5 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
 
     public interface OnCheckedChangeListener {
         void onCheckedChanged(CompoundButton buttonView, boolean isChecked, int position);
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        if (position == getItemCount()-1) {
-            return TYPE_END;
-        } else {
-            return TYPE_TODO;
-        }
     }
 }

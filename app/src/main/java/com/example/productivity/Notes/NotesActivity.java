@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
+import android.widget.CompoundButton;
+
 import com.example.productivity.MainActivity;
 import com.example.productivity.R;
 import com.example.productivity.stuff.GridSpacingItemDecoration;
@@ -16,16 +18,19 @@ import com.example.productivity.stuff.VerticalSpaceItemDecoration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotesActivity extends AppCompatActivity implements NotesAdapter.ItemClickListener, TodoAdapter.ItemClickListener, TodoAdapter.TextWatcher {
+public class NotesActivity extends AppCompatActivity implements NotesAdapter.ItemClickListener, TodoAdapter.ItemClickListener, TodoAdapter.TextWatcher, TodoAdapter.OnCheckedChangeListener {
 
     private RecyclerView notesView;
     private RecyclerView todoView;
+    private RecyclerView doneView;
 
     private NotesAdapter notesAdapter;
     private List<Note> noteList;
 
     private TodoAdapter todoAdapter;
     private List<Todo> todoList;
+    private TodoAdapter doneAdapter;
+    private List<Todo> doneList;
 
     static String editType = "com.example.productivity.NotesActivity.editType";
     static int editTypeNote = 0;
@@ -36,6 +41,7 @@ public class NotesActivity extends AppCompatActivity implements NotesAdapter.Ite
     static String noteReturnExtra = "com.example.productivity.NotesActivity.noteReturn";
     private int requestCodeEditNote = 1;
 
+    private final String doneKey = "com.example.productivity.NotesActivity.doneKey";
     private final String todoKey = "com.example.productivity.NotesActivity.todoKey";
     static String todoEditExtra = "com.example.productivity.NotesActivity.todoEdit";
     static String todoReturnExtra = "com.example.productivity.NotesActivity.todoReturn";
@@ -118,6 +124,15 @@ public class NotesActivity extends AppCompatActivity implements NotesAdapter.Ite
         todoView.addItemDecoration(new VerticalSpaceItemDecoration(20));
         todoView.setAdapter(todoAdapter);
 
+        doneView = findViewById(R.id.todo);
+        doneView.setHasFixedSize(true);
+        doneAdapter = new TodoAdapter(doneList);
+        doneAdapter.setClickListener(this);
+        doneAdapter.setTextWatcher(this);
+        doneView.setLayoutManager(new LinearLayoutManager(this));
+        doneView.addItemDecoration(new VerticalSpaceItemDecoration(20));
+        doneView.setAdapter(doneAdapter);
+
         notesView = findViewById(R.id.notes);
         notesView.setHasFixedSize(true);
         notesAdapter = new NotesAdapter(noteList);
@@ -134,11 +149,21 @@ public class NotesActivity extends AppCompatActivity implements NotesAdapter.Ite
             todoList = new ArrayList<>();
         }
 
+        doneList = (ArrayList<Todo>) MainActivity.store.read(doneKey);
+
+        if (doneList == null) {
+            doneList = new ArrayList<>();
+        }
+
         noteList = (ArrayList<Note>) MainActivity.store.read(noteKey);
 
         if (noteList == null) {
             noteList = new ArrayList<>();
         }
+    }
+
+    private void writeDone() {
+        MainActivity.store.write(doneKey, doneList);
     }
 
     private void writeTodos() {
@@ -170,5 +195,14 @@ public class NotesActivity extends AppCompatActivity implements NotesAdapter.Ite
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked, int position) {
+        if (isChecked) {
+            doneList.add(todoList.remove(position));
+            todoAdapter.notifyItemRemoved(position);
+
+        }
     }
 }
