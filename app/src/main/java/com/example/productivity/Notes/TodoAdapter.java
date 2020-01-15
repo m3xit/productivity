@@ -1,7 +1,6 @@
 package com.example.productivity.Notes;
 
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +20,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
     private OnCheckedChangeListener checkListener;
     private final int TYPE_TODO = 0;
     private final int TYPE_END = 1;
+    public static int TYPE = 0;
 
     public class TodoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, android.text.TextWatcher, CompoundButton.OnCheckedChangeListener {
         EditText title;
@@ -56,12 +56,18 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
 
         @Override
         public void afterTextChanged(Editable s) {
-            if (textWatcher != null) textWatcher.afterTextChanged(s, getAdapterPosition());
+            if (textWatcher != null) textWatcher.afterTextChanged(s, getAdapterPosition(), TYPE);
         }
 
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if(checkListener != null) checkListener.onCheckedChanged(buttonView, isChecked, getAdapterPosition());
+            if(checkListener != null) checkListener.onCheckedChanged(buttonView, isChecked, getAdapterPosition(), TYPE);
+        }
+
+        public void setUnchecked() {
+            checkBox.setOnCheckedChangeListener(null);
+            checkBox.setChecked(false);
+            checkBox.setOnCheckedChangeListener(this);
         }
     }
 
@@ -82,6 +88,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
         } else {
             holder.title.setText(todoList.get(position).getTitle());
         }
+        holder.setUnchecked();
     }
 
     @Override
@@ -106,13 +113,13 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
     }
 
     public interface TextWatcher {
-        void afterTextChanged(Editable s, int position);
+        void afterTextChanged(Editable s, int position, int type);
         void onTextChanged(CharSequence s, int start, int before, int count);
         void beforeTextChanged(CharSequence s, int start, int count, int after);
     }
 
     public interface OnCheckedChangeListener {
-        void onCheckedChanged(CompoundButton buttonView, boolean isChecked, int position);
+        void onCheckedChanged(CompoundButton buttonView, boolean isChecked, int position, int type);
     }
 
     @Override
