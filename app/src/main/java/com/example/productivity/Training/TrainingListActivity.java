@@ -67,7 +67,6 @@ public class TrainingListActivity extends AppCompatActivity implements TrainingL
 
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, TrainingDetailsActivity.class);
         intent.putExtra(TrainingViewExtra, trainings.get(position));
         startActivity(intent);

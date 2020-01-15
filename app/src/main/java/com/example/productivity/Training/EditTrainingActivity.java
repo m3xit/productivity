@@ -17,7 +17,7 @@ import android.app.AlertDialog;
 
 public class EditTrainingActivity extends AppCompatActivity implements EditExerciseAdapter.ItemClickListener {
 
-    private TextView title;
+    private EditText title;
     private RecyclerView exercises;
 
     private EditExerciseAdapter adapter;
@@ -62,6 +62,9 @@ public class EditTrainingActivity extends AppCompatActivity implements EditExerc
     }
 
     private void sendBack() {
+        if (!title.getText().toString().equals(training.getName())) {
+            training.setName(title.getText().toString());
+        }
         Intent result = new Intent();
         result.putExtra(TrainingListActivity.TrainingCreateExtra, training);
         setResult(RESULT_OK, result);

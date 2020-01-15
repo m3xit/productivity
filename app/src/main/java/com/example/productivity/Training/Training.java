@@ -33,6 +33,10 @@ public class Training implements Serializable {
         this.duration = duration;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     String getName() {
         return name;
     }
