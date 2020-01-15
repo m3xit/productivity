@@ -20,6 +20,6 @@ public class Appointment implements Serializable {
     }
 
     public String getDate() {
-        return "" + mDay + "." + mMonth + "." + mYear + " " + mHour + ":" + mMinute;
+        return String.format("%02d.%02d.%02d %02d:%02d", mDay, mMonth+1, mYear, mHour, mMinute);
     }
 }

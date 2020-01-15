@@ -24,7 +24,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_margin="5dp"
+        android:layout_margin="@dimen/standart_margin"
+        android:padding="@dimen/standart_margin"
         android:background="@color/lighterBackground"
         app:layout_constraintBottom_toBottomOf="parent">
 
@@ -39,7 +40,9 @@
             android:layout_height="wrap_content"
             android:text="@string/add_appointment"
             android:layout_gravity="center"
-            android:onClick="onClick"/>
+            android:onClick="onClick"
+            android:layout_margin="@dimen/standart_margin"
+            android:background="@color/darkGreen"/>
 
     </LinearLayout>
 
