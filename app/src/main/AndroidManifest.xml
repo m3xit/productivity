@@ -15,9 +15,11 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".Training.EditTrainingActivity"/>
+            android:name=".Training.EditTrainingActivity"
+            android:parentActivityName=".Training.TrainingListActivity"/>
         <activity
-            android:name=".Notes.EditNoteActivity"/>
+            android:name=".Notes.EditNoteActivity"
+            android:parentActivityName=".Notes.NotesActivity"/>
         <activity
             android:name=".Calendar.NewAppointmentActivity"
             android:parentActivityName=".Calendar.WeekPlanActivity"/>
@@ -43,7 +45,6 @@
             android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>

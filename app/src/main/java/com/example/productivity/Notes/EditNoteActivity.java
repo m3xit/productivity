@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.example.productivity.R;
@@ -41,14 +42,26 @@ public class EditNoteActivity extends AppCompatActivity {
         }
     }
 
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                setResult();
+                finish();
+                return true;
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     public void onBackPressed() {
-        result();
+        setResult();
 
         super.onBackPressed();
     }
 
-    private void result() {
+    private void setResult() {
         Intent result = new Intent();
 
         if (type == NotesActivity.editTypeNote) {

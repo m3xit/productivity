@@ -42,6 +42,7 @@
             android:layout_gravity="center"
             android:onClick="onClick"
             android:layout_margin="@dimen/standart_margin"
+            android:padding="@dimen/standart_margin"
             android:background="@color/darkGreen"/>
 
     </LinearLayout>

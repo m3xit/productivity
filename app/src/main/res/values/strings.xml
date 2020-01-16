@@ -12,11 +12,12 @@
 
     <!--week plan-->
     <string name="appointment_name">Appointment Name</string>
-    <string name="date">Date</string>
-    <string name="time">Time</string>
+    <string name="date">Set Date</string>
+    <string name="time">Set Time</string>
     <string name="done">Done</string>
     <string name="add_appointment">Add Appointment</string>
     <string name="content_description_week_plan">Image of weekly schedule</string>
+    <string name="create_appointment">Create a new Appointment</string>
 
     <!--training-->
     <string name="start_training">Start a Training</string>

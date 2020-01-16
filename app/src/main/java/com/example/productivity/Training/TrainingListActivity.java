@@ -1,6 +1,7 @@
 package com.example.productivity.Training;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,6 +16,7 @@ import com.example.productivity.MainActivity;
 import com.example.productivity.R;
 import com.example.productivity.stuff.VerticalSpaceItemDecoration;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,12 +26,15 @@ public class TrainingListActivity extends AppCompatActivity implements TrainingL
     List<Training> trainings;
     RecyclerView recyclerView;
 
-    static int requestCodeNewTraining = 1;
+    static int requestCodeNewTraining = 0;
+    static int requestCodeViewTraining = 1;
 
     public static String TrainingCreateExtra = "com.example.productivity.TrainingListActivity.TrainingCreateExtra";
     public static String TrainingViewExtra = "com.example.productivity.TrainingListActivity.TrainingViewExtra";
 
     private final String trainingsKey = "com.example.productivity.TrainingListActivity.trainingKey";
+
+    private int trainingViewed = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +59,19 @@ public class TrainingListActivity extends AppCompatActivity implements TrainingL
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == requestCodeNewTraining) {
-            if (resultCode == RESULT_OK) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == requestCodeNewTraining) {
                 Training newTraining = (Training) data.getExtras().get(TrainingCreateExtra);
                 trainings.add(0, newTraining);
-                adapter.notifyDataSetChanged();
+                adapter.notifyItemInserted(0);
+                adapter.notifyItemRangeChanged(0, trainings.size());
+                writeTrainings();
 
+            } else if (requestCode == requestCodeViewTraining) {
+                Training newTraining = (Training) data.getExtras().get(TrainingViewExtra);
+                trainings.set(trainingViewed, newTraining);
+                adapter.notifyItemChanged(trainingViewed);
+                System.out.println("****************************");
                 writeTrainings();
             }
         }
@@ -69,7 +81,8 @@ public class TrainingListActivity extends AppCompatActivity implements TrainingL
     public void onItemClick(View view, int position) {
         Intent intent = new Intent(this, TrainingDetailsActivity.class);
         intent.putExtra(TrainingViewExtra, trainings.get(position));
-        startActivity(intent);
+        trainingViewed = position;
+        startActivityForResult(intent, requestCodeViewTraining);
     }
 
     private void initializeAdapters() {
@@ -79,7 +92,6 @@ public class TrainingListActivity extends AppCompatActivity implements TrainingL
         adapter.setClickListener(this);
         adapter.setLongClickListener(this);
         recyclerView.setAdapter(adapter);
-
         recyclerView.addItemDecoration(new VerticalSpaceItemDecoration(20));
     }
 

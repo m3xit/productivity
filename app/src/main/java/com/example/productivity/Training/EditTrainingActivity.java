@@ -7,9 +7,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
+
 import com.example.productivity.R;
 import com.example.productivity.stuff.VerticalSpaceItemDecoration;
 
@@ -35,7 +36,7 @@ public class EditTrainingActivity extends AppCompatActivity implements EditExerc
 
         title = findViewById(R.id.title);
         title.setText(training.getName());
-        exercises = findViewById(R.id.exerciseList);
+        exercises = findViewById(R.id.exercise_list);
 
         exercises.setLayoutManager(new LinearLayoutManager(this));
         adapter = new EditExerciseAdapter(this, training.getExercises());
@@ -47,6 +48,18 @@ public class EditTrainingActivity extends AppCompatActivity implements EditExerc
         exercises.setAdapter(adapter);
 
         exercises.addItemDecoration(new VerticalSpaceItemDecoration(20));
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                sendBack();
+                finish();
+                return true;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

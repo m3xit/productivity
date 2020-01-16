@@ -8,7 +8,7 @@ public class Exercise implements Serializable {
 
     public Exercise(String name, String sets) {
         this.sets = sets;
-        this.name = name;
+        this.name = name.replace("\n", " ").trim();
     }
 
     public String getSets() {
@@ -21,9 +21,9 @@ public class Exercise implements Serializable {
 
     public void addSet(String set) {
         if (sets.equals("")) {
-            sets = set;
+            sets = set.trim();
         } else {
-            this.sets += "\n" + set;
+            this.sets += "\n" + set.trim();
         }
     }
 }

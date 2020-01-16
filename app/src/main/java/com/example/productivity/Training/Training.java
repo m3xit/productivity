@@ -14,7 +14,7 @@ public class Training implements Serializable {
     private List<Exercise> exercises;
 
     public Training(String name, TrainingType type) {
-        this.name = name;
+        this.name = name.replace("\n", " ").trim();
         this.type = type;
         this.date = new Date();
         this.duration = 100;
@@ -34,7 +34,7 @@ public class Training implements Serializable {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name.replace("\n", " ").trim();
     }
 
     String getName() {

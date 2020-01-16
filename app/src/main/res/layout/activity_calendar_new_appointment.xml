@@ -12,8 +12,16 @@
         android:layout_height="wrap_content"
         android:background="@color/lighterBackground"
         android:layout_margin="5dp"
+        android:padding="@dimen/standart_margin"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_title"
+            android:text="@string/create_appointment"
+            android:layout_gravity="center"/>
 
         <EditText
             android:id="@+id/name"
@@ -53,7 +61,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/done"
-            android:onClick="onClick"/>
+            android:onClick="onClick"
+            android:layout_gravity="center"
+            android:background="@color/darkGreen"/>
 
     </LinearLayout>
 
