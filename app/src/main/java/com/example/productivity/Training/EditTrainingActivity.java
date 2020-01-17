@@ -19,10 +19,12 @@ public class EditTrainingActivity extends AppCompatActivity implements EditExerc
 
     private EditText title;
     private RecyclerView exercises;
+    private RecyclerView templateExercises;
 
     private EditExerciseAdapter adapter;
+    private EditExerciseAdapter templateAdapter;
 
-    private Training training;
+    private Training training, template;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,24 +33,38 @@ public class EditTrainingActivity extends AppCompatActivity implements EditExerc
 
         setTitle(R.string.edit_training);
 
-        training = TrainingListActivity.trainingManager.getCurrentTraining();
+        training = TrainingListActivity.trainingManager.getCurrentTrainingId();
 
         title = findViewById(R.id.title);
+
         exercises = findViewById(R.id.exercise_list);
+        adapter = new EditExerciseAdapter(this, training.getExercises(), true);
+        initializeAdapter(adapter, exercises);
 
         title.setText(training.getName());
         exercises.addItemDecoration(new VerticalSpaceItemDecoration(20));
 
-        initializeAdapter();
+        template();
     }
 
-    private void initializeAdapter() {
-        exercises.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new EditExerciseAdapter(this, training.getExercises());
-        adapter.setClickListener(this);
+    private void template() {
+        template = TrainingListActivity.trainingManager.getTemplate();
+
+        if (template != null) {
+            templateExercises = findViewById(R.id.template_list);
+            templateExercises.setVisibility(View.VISIBLE);
+            templateExercises.addItemDecoration(new VerticalSpaceItemDecoration(20));
+            EditExerciseAdapter templateAdapter = new EditExerciseAdapter(this, template.getExercises(), false);
+            initializeAdapter(templateAdapter, templateExercises);
+        }
+    }
+
+    private void initializeAdapter(EditExerciseAdapter exerciseAdapter, RecyclerView recyclerView) {
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        exerciseAdapter.setClickListener(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        exercises.setLayoutManager(layoutManager);
-        exercises.setAdapter(adapter);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(exerciseAdapter);
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {

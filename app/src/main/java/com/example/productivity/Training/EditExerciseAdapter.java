@@ -17,32 +17,34 @@ import java.util.List;
 public class EditExerciseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<Exercise> exercises;
-    private LayoutInflater mInflater;
-    private EditExerciseAdapter.ItemClickListener mClickListener;
+    private LayoutInflater inflater;
+    private boolean editable;
+    private EditExerciseAdapter.ItemClickListener clickListener;
 
     private int TYPE_EXERCISE = 0;
     private int TYPE_END = 1;
 
     // data is passed into the constructor
-    EditExerciseAdapter(Context context, List<Exercise> data) {
-        this.mInflater = LayoutInflater.from(context);
+    EditExerciseAdapter(Context context, List<Exercise> data, boolean editable) {
+        this.inflater = LayoutInflater.from(context);
         this.exercises = data;
+        this.editable = editable;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         if (viewType == TYPE_END) {
-            View view = mInflater.inflate(R.layout.element_exercise_edit_end, viewGroup, false);
+            View view = inflater.inflate(R.layout.element_exercise_edit_end, viewGroup, false);
             return new EditExerciseEndViewHolder(view);
         } else {
-            View view = mInflater.inflate(R.layout.element_exercise_edit, viewGroup, false);
+            View view = inflater.inflate(R.layout.element_exercise_edit, viewGroup, false);
             return new EditExerciseViewHolder(view);
         }
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
-        if (position == getItemCount()-1) {
+        if (getItemViewType(position) == TYPE_END) {
             //EditExerciseEndViewHolder
         } else {
             Exercise exercise = exercises.get(position);
@@ -54,7 +56,7 @@ public class EditExerciseAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     // total number of rows
     @Override
     public int getItemCount() {
-        return exercises.size()+1;
+        return editable ? exercises.size()+1 : exercises.size();
     }
 
     // stores and recycles views as they are scrolled off screen
@@ -71,7 +73,7 @@ public class EditExerciseAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         @Override
         public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+            if (clickListener != null) clickListener.onItemClick(view, getAdapterPosition());
         }
     }
 
@@ -87,7 +89,7 @@ public class EditExerciseAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         @Override
         public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+            if (clickListener != null) clickListener.onItemClick(view, getAdapterPosition());
         }
     }
 
@@ -98,7 +100,7 @@ public class EditExerciseAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     // allows clicks events to be caught
     void setClickListener(EditExerciseAdapter.ItemClickListener itemClickListener) {
-        this.mClickListener = itemClickListener;
+        this.clickListener = itemClickListener;
     }
 
     // parent activity will implement this method to respond to click events
@@ -108,7 +110,7 @@ public class EditExerciseAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemViewType(int position) {
-        if (position == getItemCount()-1) {
+        if (editable && position == getItemCount()-1) {
             return TYPE_END;
         } else {
             return TYPE_EXERCISE;

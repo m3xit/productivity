@@ -8,11 +8,13 @@ import java.util.List;
 public class TrainingManager {
 
     private final String trainingsKey = "com.example.productivity.TrainingListActivity.trainingKey";
+    private final String templateWorkoutsKey = "com.example.productivity.TrainingListActivity.templateWorkoutsKey";
 
     private List<Training> trainingsLog;
+    //todo
     private List<Training> templateWorkouts;
 
-    private int currentTraining = 0;
+    private int currentTrainingId = 0;
 
     TrainingManager() {
         trainingsLog = (List<Training>) MainActivity.store.read(trainingsKey);
@@ -20,27 +22,43 @@ public class TrainingManager {
         if (trainingsLog == null) {
             trainingsLog = new ArrayList<>();
         }
+        templateWorkouts = (List<Training>) MainActivity.store.read(templateWorkoutsKey);
+
+        if (templateWorkouts == null) {
+            templateWorkouts = new ArrayList<>();
+        }
     }
 
     void startTraining(String name, TrainingType type) {
-        currentTraining = 0;
+        startTraining(0);
         add(new Training(name, type));
     }
 
-    void setCurrentTrainingId(int currentTraining) {
-        this.currentTraining = currentTraining;
+    void startTraining(int currentTrainingId) {
+        this.currentTrainingId = currentTrainingId;
     }
 
-    public int getCurrentTrainingId() {
-        return currentTraining;
+    Training getTemplate() {
+        String name = trainingsLog.get(currentTrainingId).getName();
+
+        Training template = null;
+
+        for (int i = currentTrainingId + 1; i < trainingsLog.size(); i++) {
+            //todo better search
+            if (trainingsLog.get(i).getName().equals(name)) {
+                template = trainingsLog.get(i);
+            }
+        }
+
+        return template;
     }
 
     void setCurrentTraining(Training training) {
-        set(currentTraining, training);
+        set(currentTrainingId, training);
     }
 
-    Training getCurrentTraining() {
-        return trainingsLog.get(currentTraining);
+    Training getCurrentTrainingId() {
+        return trainingsLog.get(currentTrainingId);
     }
 
     List<Training> getTrainings() {

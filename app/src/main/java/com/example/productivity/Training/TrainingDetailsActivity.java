@@ -28,7 +28,7 @@ public class TrainingDetailsActivity extends AppCompatActivity implements Exerci
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_training_details);
 
-        training = TrainingListActivity.trainingManager.getCurrentTraining();
+        training = TrainingListActivity.trainingManager.getCurrentTrainingId();
         exercises = training.getExercises();
 
         titleView = findViewById(R.id.statistics);

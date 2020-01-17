@@ -51,7 +51,7 @@ public class TrainingListActivity extends AppCompatActivity implements TrainingL
     @Override
     public void onItemClick(View view, int position) {
         Intent intent = new Intent(this, TrainingDetailsActivity.class);
-        trainingManager.setCurrentTrainingId(position);
+        trainingManager.startTraining(position);
         startActivity(intent);
     }
 
