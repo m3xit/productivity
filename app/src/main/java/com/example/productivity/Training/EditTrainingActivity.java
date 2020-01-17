@@ -1,20 +1,19 @@
 package com.example.productivity.Training;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.productivity.R;
 import com.example.productivity.stuff.VerticalSpaceItemDecoration;
-
-import android.app.AlertDialog;
 
 public class EditTrainingActivity extends AppCompatActivity implements EditExerciseAdapter.ItemClickListener {
 
@@ -32,22 +31,24 @@ public class EditTrainingActivity extends AppCompatActivity implements EditExerc
 
         setTitle(R.string.edit_training);
 
-        training = (Training) getIntent().getExtras().get(TrainingListActivity.TrainingCreateExtra);
+        training = TrainingListActivity.trainingManager.getCurrentTraining();
 
         title = findViewById(R.id.title);
-        title.setText(training.getName());
         exercises = findViewById(R.id.exercise_list);
 
+        title.setText(training.getName());
+        exercises.addItemDecoration(new VerticalSpaceItemDecoration(20));
+
+        initializeAdapter();
+    }
+
+    private void initializeAdapter() {
         exercises.setLayoutManager(new LinearLayoutManager(this));
         adapter = new EditExerciseAdapter(this, training.getExercises());
         adapter.setClickListener(this);
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         exercises.setLayoutManager(layoutManager);
-
         exercises.setAdapter(adapter);
-
-        exercises.addItemDecoration(new VerticalSpaceItemDecoration(20));
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -57,8 +58,8 @@ public class EditTrainingActivity extends AppCompatActivity implements EditExerc
                 sendBack();
                 finish();
                 return true;
-
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -78,22 +79,17 @@ public class EditTrainingActivity extends AppCompatActivity implements EditExerc
         if (!title.getText().toString().equals(training.getName())) {
             training.setName(title.getText().toString());
         }
-        Intent result = new Intent();
-        result.putExtra(TrainingListActivity.TrainingCreateExtra, training);
-        setResult(RESULT_OK, result);
+
+        TrainingListActivity.trainingManager.setCurrentTraining(training);
     }
 
     private void addSet(int position, String set) {
-        if (!set.equals("")) {
-            training.addSet(position, set);
-            adapter.notifyDataSetChanged();
-        }
+        training.addSet(position, set);
+        adapter.notifyDataSetChanged();
     }
 
     private void addExercise(String name) {
-        if (!name.equals("")) {
-            training.addExercise(new Exercise(name, ""));
-        }
+        training.addExercise(new Exercise(name, ""));
     }
 
     @Override

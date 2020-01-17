@@ -21,24 +21,26 @@ public class Training implements Serializable {
         exercises = new ArrayList<>();
     }
 
-    void addExercise(Exercise e) {
-        exercises.add(e);
+    void addSet(int position, String set) {
+        if (!set.equals("")) {
+            exercises.get(position).addSet(set);
+        }
     }
 
-    void addSet(int position, String set) {
-        exercises.get(position).addSet(set);
+    int getDuration() {
+        return duration;
     }
 
     public void setDuration(int duration) {
         this.duration = duration;
     }
 
-    public void setName(String name) {
-        this.name = name.replace("\n", " ").trim();
-    }
-
     String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name.replace("\n", " ").trim();
     }
 
     TrainingType getType() {
@@ -48,10 +50,6 @@ public class Training implements Serializable {
     String getDate() {
         SimpleDateFormat ft = new SimpleDateFormat ("dd.MM.yyyy");
         return ft.format(date);
-    }
-
-    int getDuration() {
-        return duration;
     }
 
     List<Exercise> getExercises() {
@@ -64,6 +62,12 @@ public class Training implements Serializable {
         }
 
         return null;
+    }
+
+    void addExercise(Exercise e) {
+        if (!name.equals("")) {
+            exercises.add(e);
+        }
     }
 }
 

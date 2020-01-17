@@ -1,16 +1,14 @@
 package com.example.productivity.Training;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.productivity.R;
 import com.example.productivity.stuff.HorizontalSpaceItemDecoration;
@@ -30,8 +28,7 @@ public class TrainingDetailsActivity extends AppCompatActivity implements Exerci
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_training_details);
 
-        training = (Training) getIntent().getExtras().get(TrainingListActivity.TrainingViewExtra);
-
+        training = TrainingListActivity.trainingManager.getCurrentTraining();
         exercises = training.getExercises();
 
         titleView = findViewById(R.id.statistics);
@@ -41,6 +38,14 @@ public class TrainingDetailsActivity extends AppCompatActivity implements Exerci
 
         //don't add spacer after every edit
         recyclerView.addItemDecoration(new HorizontalSpaceItemDecoration(20));
+    }
+
+    @Override
+    protected void onStart() {
+        adapter.notifyDataSetChanged();
+        setTitle();
+
+        super.onStart();
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -56,29 +61,7 @@ public class TrainingDetailsActivity extends AppCompatActivity implements Exerci
 
     public void onClick(View view) {
         Intent intent = new Intent(this, EditTrainingActivity.class);
-        intent.putExtra(TrainingListActivity.TrainingCreateExtra, training);
-        startActivityForResult(intent, TrainingListActivity.requestCodeNewTraining);
-    }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == TrainingListActivity.requestCodeNewTraining) {
-            if (resultCode == RESULT_OK) {
-                training = (Training) data.getExtras().get(TrainingListActivity.TrainingCreateExtra);
-                exercises = training.getExercises();
-
-                System.out.println(training.getName() + " " + exercises.size());
-                setTitle();
-                initializeAdapter();
-
-                setResult();
-            }
-        }
-    }
-
-    private void setResult() {
-        Intent result = new Intent();
-        result.putExtra(TrainingListActivity.TrainingViewExtra, training);
-        setResult(RESULT_OK, result);
+        startActivity(intent);
     }
 
     @Override
@@ -99,8 +82,8 @@ public class TrainingDetailsActivity extends AppCompatActivity implements Exerci
     private void setTitle() {
         setTitle(training.getName() + " am " + training.getDate());
 
-        String title =   "Anzahl Übungen:\t\t" + exercises.size() + "\n";
-        title +=         "Trainingsdauer:\t\t" + training.getDuration() + " min\n";
+        String title = "Anzahl Übungen:\t\t" + training.getExercises().size() + "\n";
+        title += "Trainingsdauer:\t\t" + training.getDuration() + " min\n";
         switch (training.getType()) {
             case GYM:
                 title += "Trainingstyp:\t\t Kraftraum";

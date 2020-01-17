@@ -1,13 +1,13 @@
 package com.example.productivity.Training;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.productivity.R;
 
@@ -36,16 +36,12 @@ public class NewTrainingActivity extends AppCompatActivity {
         if (view.getId() == R.id.start_training) {
             if (type == TrainingType.GYM) {
                 Intent intent = new Intent(this, EditTrainingActivity.class);
-                String name = ((EditText)findViewById(R.id.editText)).getText().toString();
-                Training training = new Training(name, type);
-                intent.putExtra(TrainingListActivity.TrainingCreateExtra, training);
-                startActivityForResult(intent, TrainingListActivity.requestCodeNewTraining);
+                String name = ((EditText) findViewById(R.id.editText)).getText().toString();
+                TrainingListActivity.trainingManager.startTraining(name, type);
+                startActivity(intent);
             } else {
-                Intent intent = new Intent();
-                String name = ((EditText)findViewById(R.id.editText)).getText().toString();
-                Training training = new Training(name, type);
-                intent.putExtra(TrainingListActivity.TrainingCreateExtra, training);
-                setResult(RESULT_OK, intent);
+                String name = ((EditText) findViewById(R.id.editText)).getText().toString();
+                TrainingListActivity.trainingManager.startTraining(name, type);
                 finish();
             }
 
@@ -93,15 +89,6 @@ public class NewTrainingActivity extends AppCompatActivity {
             case OTHER:
                 other.setBackground(getDrawable(R.color.darkRed));
                 break;
-        }
-    }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == TrainingListActivity.requestCodeNewTraining) {
-            if (resultCode == RESULT_OK) {
-                setResult(RESULT_OK, data);
-                finish();
-            }
         }
     }
 }

@@ -31,7 +31,8 @@
             android:parentActivityName=".Training.TrainingListActivity"/>
         <activity
             android:name=".Training.NewTrainingActivity"
-            android:parentActivityName=".Training.TrainingListActivity"/>
+            android:parentActivityName=".Training.TrainingListActivity"
+            android:noHistory="true"/>
         <activity
             android:name=".Training.TrainingListActivity"
             android:parentActivityName=".MainActivity"/>
