@@ -16,7 +16,7 @@ public class EditNoteActivity extends AppCompatActivity {
     private int type = -1;
 
     private Note note;
-    private Todo todo;
+    //private Todo todo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,18 +28,22 @@ public class EditNoteActivity extends AppCompatActivity {
         title = findViewById(R.id.title);
         body = findViewById(R.id.body);
 
+        getDate();
+    }
+
+    private void getDate() {
         Intent intent = getIntent();
         type = (int) intent.getExtras().get(NotesActivity.editType);
 
-        if (type == NotesActivity.editTypeNote) {
+        //if (type == NotesActivity.editTypeNote) {
             note = (Note) intent.getExtras().get(NotesActivity.noteEditExtra);
             title.setText(note.getTitle());
             body.setText(note.getBody());
-        } else if (type == NotesActivity.editTypeTodo) {
-            todo = (Todo) intent.getExtras().get(NotesActivity.todoEditExtra);
-            title.setText(todo.getTitle());
-            body.setText(todo.getBody());
-        }
+//        } else if (type == NotesActivity.editTypeTodo) {
+//            todo = (Todo) intent.getExtras().get(NotesActivity.todoEditExtra);
+//            title.setText(todo.getTitle());
+//            body.setText(todo.getBody());
+//        }
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {

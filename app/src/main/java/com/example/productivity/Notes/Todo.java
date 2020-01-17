@@ -2,27 +2,18 @@ package com.example.productivity.Notes;
 
 import java.io.Serializable;
 
-public class Todo implements Serializable {
-    private String title, body;
+public class Todo extends Note implements Serializable {
+    private boolean done;
+
 
     public Todo(String title, String body) {
-        this.title = title;
-        this.body = body;
+        this(title, body, true);
+        //super(title, body);
     }
 
-    public String getTitle() {
-        return title;
-    }
+    public Todo(String title, String body, boolean done) {
+        super(title, body);
 
-    public String getBody() {
-        return body;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
+        this.done = done;
     }
 }

@@ -73,7 +73,7 @@ public class NotesActivity extends AppCompatActivity implements NotesAdapter.Ite
             intent.putExtra(editType, editTypeNote);
             if (position == noteList.size()) {
                 noteList.add(new Note("", ""));
-                intent.putExtra(noteEditExtra, noteList.get(position));
+                intent.putExtra(noteEditExtra, noteList.get(noteEdited));
             } else {
                 intent.putExtra(noteEditExtra, noteList.get(noteEdited));
             }
@@ -88,10 +88,16 @@ public class NotesActivity extends AppCompatActivity implements NotesAdapter.Ite
             intent.putExtra(editType, editTypeTodo);
             if (position == todoList.size()) {
                 todoList.add(new Todo("", ""));
-                intent.putExtra(todoEditExtra, todoList.get(position));
+                intent.putExtra(noteEditExtra, todoList.get(todoEdited));
             } else {
-                intent.putExtra(todoEditExtra, todoList.get(todoEdited));
+                intent.putExtra(noteEditExtra, todoList.get(todoEdited));
             }
+//            if (position == todoList.size()) {
+//                todoList.add(new Todo("", ""));
+//                intent.putExtra(todoEditExtra, todoList.get(todoEdited));
+//            } else {
+//                intent.putExtra(todoEditExtra, todoList.get(todoEdited));
+//            }
 
             startActivityForResult(intent, requestCodeEditTodo);
 
