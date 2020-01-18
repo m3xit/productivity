@@ -5,13 +5,14 @@ import java.io.Serializable;
 public class Exercise implements Serializable {
 
     private String name, sets;
+    private static final long serialVersionUID = 6117840541671362280L;
 
-    public Exercise(String name, String sets) {
+    Exercise(String name, String sets) {
         this.sets = sets;
         this.name = name.replace("\n", " ").trim();
     }
 
-    public String getSets() {
+    String getSets() {
         return sets;
     }
 
@@ -19,7 +20,7 @@ public class Exercise implements Serializable {
         return name;
     }
 
-    public void addSet(String set) {
+    void addSet(String set) {
         if (sets.equals("")) {
             sets = set.trim();
         } else {

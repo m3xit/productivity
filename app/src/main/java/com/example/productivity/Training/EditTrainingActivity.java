@@ -38,7 +38,7 @@ public class EditTrainingActivity extends AppCompatActivity implements EditExerc
         title = findViewById(R.id.title);
 
         exercises = findViewById(R.id.exercise_list);
-        adapter = new EditExerciseAdapter(this, training.getExercises());
+        adapter = new EditExerciseAdapter(this, training.getExercises(), true);
         initializeAdapter(adapter, exercises);
 
         title.setText(training.getName());
@@ -54,7 +54,7 @@ public class EditTrainingActivity extends AppCompatActivity implements EditExerc
             templateExercises = findViewById(R.id.template_list);
             templateExercises.setVisibility(View.VISIBLE);
             templateExercises.addItemDecoration(new VerticalSpaceItemDecoration(20));
-            EditExerciseAdapter templateAdapter = new EditExerciseAdapter(this, template.getExercises());
+            EditExerciseAdapter templateAdapter = new EditExerciseAdapter(this, template.getExercises(), false);
             initializeAdapter(templateAdapter, templateExercises);
         }
     }
@@ -133,6 +133,11 @@ public class EditTrainingActivity extends AppCompatActivity implements EditExerc
         dialogBuilder.create().show();
     }
 
+    private void removeExercise(int position) {
+        training.removeExercise(position);
+        adapter.notifyDataSetChanged();
+    }
+
     private void sendBack() {
         if (!title.getText().toString().equals(training.getName())) {
             training.setName(title.getText().toString());
@@ -152,6 +157,10 @@ public class EditTrainingActivity extends AppCompatActivity implements EditExerc
 
     @Override
     public void onItemClick(View view, int position) {
-        addSet(position);
+        if (view.getId() == R.id.imageView) {
+            removeExercise(position);
+        } else {
+            addSet(position);
+        }
     }
 }

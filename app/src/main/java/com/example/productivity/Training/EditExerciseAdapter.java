@@ -1,10 +1,12 @@
 package com.example.productivity.Training;
 
 import android.content.Context;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,11 +20,13 @@ public class EditExerciseAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private List<Exercise> exercises;
     private LayoutInflater inflater;
+    private boolean editable;
     private EditExerciseAdapter.ItemClickListener clickListener;
 
-    EditExerciseAdapter(Context context, List<Exercise> data) {
+    EditExerciseAdapter(Context context, List<Exercise> data, boolean editable) {
         this.inflater = LayoutInflater.from(context);
         this.exercises = data;
+        this.editable = editable;
     }
 
     @Override
@@ -46,11 +50,20 @@ public class EditExerciseAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public class EditExerciseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView name;
         TextView sets;
+        ImageView imageView;
 
         EditExerciseViewHolder(View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.exercise_name);
             sets = itemView.findViewById(R.id.exercise_sets);
+            imageView = itemView.findViewById(R.id.imageView);
+
+            if (editable) {
+                imageView.setOnClickListener(this);
+            } else {
+                imageView.setVisibility(View.GONE);
+            }
+
             itemView.setOnClickListener(this);
         }
 

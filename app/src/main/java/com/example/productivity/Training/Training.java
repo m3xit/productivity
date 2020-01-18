@@ -12,6 +12,7 @@ public class Training implements Serializable {
     private Date date;
     private int duration;
     private List<Exercise> exercises;
+    private static final long serialVersionUID = 526042654751858903L;
 
     public Training(String name, TrainingType type) {
         this.name = name.replace("\n", " ").trim();
@@ -68,6 +69,10 @@ public class Training implements Serializable {
         if (!name.equals("")) {
             exercises.add(e);
         }
+    }
+
+    void removeExercise(int position) {
+        exercises.remove(position);
     }
 }
 
