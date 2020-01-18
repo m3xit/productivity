@@ -38,7 +38,7 @@ public class EditTrainingActivity extends AppCompatActivity implements EditExerc
         title = findViewById(R.id.title);
 
         exercises = findViewById(R.id.exercise_list);
-        adapter = new EditExerciseAdapter(this, training.getExercises(), true);
+        adapter = new EditExerciseAdapter(this, training.getExercises());
         initializeAdapter(adapter, exercises);
 
         title.setText(training.getName());
@@ -54,7 +54,7 @@ public class EditTrainingActivity extends AppCompatActivity implements EditExerc
             templateExercises = findViewById(R.id.template_list);
             templateExercises.setVisibility(View.VISIBLE);
             templateExercises.addItemDecoration(new VerticalSpaceItemDecoration(20));
-            EditExerciseAdapter templateAdapter = new EditExerciseAdapter(this, template.getExercises(), false);
+            EditExerciseAdapter templateAdapter = new EditExerciseAdapter(this, template.getExercises());
             initializeAdapter(templateAdapter, templateExercises);
         }
     }
@@ -87,8 +87,50 @@ public class EditTrainingActivity extends AppCompatActivity implements EditExerc
     }
 
     public void onClick(View view) {
-        sendBack();
-        finish();
+        if (view.getId() == R.id.save) {
+            sendBack();
+            finish();
+        } else if (view.getId() == R.id.add) {
+            addExercise();
+        }
+    }
+
+    private void addSet(final int position) {
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_Alert);
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.fragment_edit_text, null);
+
+        final EditText editText = dialogView.findViewById(R.id.text);
+
+        dialogBuilder.setView(dialogView);
+        dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                addSet(position, editText.getText().toString());
+            }
+        });
+
+        dialogBuilder.setMessage("New Set");
+        dialogBuilder.create().show();
+    }
+
+    private void addExercise() {
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_Alert);
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.fragment_edit_text, null);
+
+        final EditText editText = dialogView.findViewById(R.id.text);
+
+        dialogBuilder.setView(dialogView);
+        dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                addExercise(editText.getText().toString());
+            }
+        });
+
+        dialogBuilder.setMessage("Exercise Name");
+        dialogBuilder.create().show();
     }
 
     private void sendBack() {
@@ -109,41 +151,7 @@ public class EditTrainingActivity extends AppCompatActivity implements EditExerc
     }
 
     @Override
-    public void onItemClick(View view, final int position) {
-        if (position == training.getExercises().size()) {
-            final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_Alert);
-            LayoutInflater inflater = this.getLayoutInflater();
-            View dialogView = inflater.inflate(R.layout.fragment_edit_text, null);
-
-            final EditText editText = dialogView.findViewById(R.id.text);
-
-            dialogBuilder.setView(dialogView);
-            dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int id) {
-                    addExercise(editText.getText().toString());
-                }
-            });
-
-            dialogBuilder.setMessage("Exercise Name");
-            dialogBuilder.create().show();
-        } else {
-            final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_Alert);
-            LayoutInflater inflater = this.getLayoutInflater();
-            View dialogView = inflater.inflate(R.layout.fragment_edit_text, null);
-
-            final EditText editText = dialogView.findViewById(R.id.text);
-
-            dialogBuilder.setView(dialogView);
-            dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int id) {
-                    addSet(position, editText.getText().toString());
-                }
-            });
-
-            dialogBuilder.setMessage("New Set");
-            dialogBuilder.create().show();
-        }
+    public void onItemClick(View view, int position) {
+        addSet(position);
     }
 }
