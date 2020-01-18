@@ -1,11 +1,13 @@
 package com.example.productivity.Training;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -107,11 +109,13 @@ public class EditTrainingActivity extends AppCompatActivity implements EditExerc
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 addSet(position, editText.getText().toString());
+                closeKeyboard();
             }
         });
 
         dialogBuilder.setMessage("New Set");
         dialogBuilder.create().show();
+        showKeyboard();
     }
 
     private void addExercise() {
@@ -126,11 +130,23 @@ public class EditTrainingActivity extends AppCompatActivity implements EditExerc
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 addExercise(editText.getText().toString());
+                closeKeyboard();
             }
         });
 
         dialogBuilder.setMessage("Exercise Name");
         dialogBuilder.create().show();
+        showKeyboard();
+    }
+
+    public void showKeyboard(){
+        InputMethodManager inputMethodManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+    }
+
+    public void closeKeyboard(){
+        InputMethodManager inputMethodManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
     }
 
     private void removeExercise(int position) {
