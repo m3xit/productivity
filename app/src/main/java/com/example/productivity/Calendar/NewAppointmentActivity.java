@@ -80,7 +80,7 @@ public class NewAppointmentActivity extends AppCompatActivity {
         if (view.getId() == R.id.done) {
             Intent data = new Intent();
             Appointment appointment = new Appointment(name.getText().toString(), mYear, mMonth, mDay, mHour, mMinute);
-            data.putExtra(WeekPlanActivity.AppointmentCreateExtra, appointment);
+            data.putExtra(CalendarActivity.AppointmentCreateExtra, appointment);
             setResult(RESULT_OK, data);
             finish();
         }

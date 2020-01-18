@@ -22,7 +22,7 @@
             android:parentActivityName=".Notes.NotesActivity"/>
         <activity
             android:name=".Calendar.NewAppointmentActivity"
-            android:parentActivityName=".Calendar.WeekPlanActivity"/>
+            android:parentActivityName=".Calendar.CalendarActivity"/>
         <activity
             android:name=".Timer.TimerActivity"
             android:parentActivityName=".MainActivity"/>
@@ -37,7 +37,7 @@
             android:name=".Training.TrainingListActivity"
             android:parentActivityName=".MainActivity"/>
         <activity
-            android:name=".Calendar.WeekPlanActivity"
+            android:name=".Calendar.CalendarActivity"
             android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".Notes.NotesActivity"

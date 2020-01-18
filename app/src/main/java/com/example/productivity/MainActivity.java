@@ -10,12 +10,10 @@ import android.hardware.camera2.CameraManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.productivity.Calendar.WeekPlanActivity;
+import com.example.productivity.Calendar.CalendarActivity;
 import com.example.productivity.Notes.NotesActivity;
 import com.example.productivity.Timer.TimerActivity;
 import com.example.productivity.Training.TrainingListActivity;
@@ -52,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent_training);
                 break;
             case R.id.button_plan:
-                Intent intent_plan = new Intent(this, WeekPlanActivity.class);
+                Intent intent_plan = new Intent(this, CalendarActivity.class);
                 startActivity(intent_plan);
                 break;
             case R.id.button_pomodoro:
