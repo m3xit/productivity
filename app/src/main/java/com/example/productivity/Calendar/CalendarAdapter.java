@@ -19,7 +19,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
     public class CalendarViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView title;
 
-        public CalendarViewHolder(View v) {
+        CalendarViewHolder(View v) {
             super(v);
             title = v.findViewById(R.id.calendar_name);
             v.setOnClickListener(this);
@@ -31,7 +31,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
         }
     }
 
-    public CalendarAdapter(List<Appointment> calendar) {
+    CalendarAdapter(List<Appointment> calendar) {
         this.calendar = calendar;
     }
 
