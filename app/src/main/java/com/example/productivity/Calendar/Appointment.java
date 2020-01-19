@@ -1,5 +1,9 @@
 package com.example.productivity.Calendar;
 
+import android.graphics.Color;
+
+import com.example.productivity.R;
+
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,7 +26,7 @@ public class Appointment implements Serializable {
         this.mDay = cal.get(Calendar.DAY_OF_MONTH);
         this.mHour = cal.getTime().getHours();
         this.mMinute = cal.getTime().getMinutes();
-        this.category = AppointmentCategory.OTHER;
+        this.category = AppointmentCategory.Other;
     }
 
     Appointment(String name, int mYear, int mMonth, int mDay, int mHour, int mMinute, AppointmentCategory category) {
@@ -49,9 +53,27 @@ public class Appointment implements Serializable {
 }
 
 enum AppointmentCategory {
-    SPORT,
-    WORK,
-    UNI,
-    HOBBY,
-    OTHER
+    Sport,
+    Work,
+    Masterarbeit,
+    Hobby,
+    Other,
+    Essen,
+    Cookie;
+
+    private int color;
+
+    static {
+        Sport.color = R.color.darkBlue;
+        Work.color = R.color.darkBlue;
+        Masterarbeit.color = R.color.darkBlue;
+        Hobby.color = R.color.darkBlue;
+        Other.color = R.color.darkBlue;
+        Essen.color = R.color.darkBlue;
+        Cookie.color = R.color.darkBlue;
+    }
+
+    public int getColor() {
+        return color;
+    }
 }

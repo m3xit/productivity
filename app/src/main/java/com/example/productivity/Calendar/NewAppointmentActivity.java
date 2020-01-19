@@ -78,7 +78,7 @@ public class NewAppointmentActivity extends AppCompatActivity {
         }
 
         if (view.getId() == R.id.done) {
-            Appointment appointment = new Appointment(name.getText().toString(), mYear, mMonth, mDay, mHour, mMinute, AppointmentCategory.OTHER);
+            Appointment appointment = new Appointment(name.getText().toString(), mYear, mMonth, mDay, mHour, mMinute, AppointmentCategory.Other);
             CalendarActivity.calendarManager.addAppointment(appointment);
             finish();
         }

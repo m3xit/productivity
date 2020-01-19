@@ -34,22 +34,13 @@ public class CalendarManager {
 
     public List<Appointment> createPlan() {
         List<Appointment> calendar = new ArrayList<>();
-        calendar.add(new Appointment("Mo"));
-        calendar.add(new Appointment("Di"));
-        calendar.add(new Appointment("Mi"));
-        calendar.add(new Appointment("Do"));
-        calendar.add(new Appointment("Fr"));
-        calendar.add(new Appointment("Sa"));
-        calendar.add(new Appointment("So"));
+
+        AppointmentCategory[] plan = new AppointmentCategory[] {AppointmentCategory.Cookie, AppointmentCategory.Cookie, AppointmentCategory.Masterarbeit, AppointmentCategory.Masterarbeit, AppointmentCategory.Masterarbeit, AppointmentCategory.Masterarbeit, AppointmentCategory.Essen, AppointmentCategory.Essen, AppointmentCategory.Masterarbeit, AppointmentCategory.Masterarbeit, AppointmentCategory.Masterarbeit, AppointmentCategory.Sport, AppointmentCategory.Sport, AppointmentCategory.Sport, AppointmentCategory.Essen, AppointmentCategory.Masterarbeit, AppointmentCategory.Masterarbeit, AppointmentCategory.Masterarbeit, AppointmentCategory.Essen, AppointmentCategory.Masterarbeit, AppointmentCategory.Masterarbeit, AppointmentCategory.Masterarbeit, AppointmentCategory.Essen, AppointmentCategory.Hobby, AppointmentCategory.Hobby, AppointmentCategory.Hobby, AppointmentCategory.Hobby, AppointmentCategory.Hobby, AppointmentCategory.Hobby, AppointmentCategory.Hobby};
 
         for (int i = 0; i < 30; i++) {
-            calendar.add(new Appointment(String.valueOf(i)));
-            calendar.add(new Appointment(String.valueOf(i)));
-            calendar.add(new Appointment(String.valueOf(i)));
-            calendar.add(new Appointment(String.valueOf(i)));
-            calendar.add(new Appointment(String.valueOf(i)));
-            calendar.add(new Appointment(String.valueOf(i)));
-            calendar.add(new Appointment(String.valueOf(i)));
+            for (int j = 0; j < 7; j++) {
+                calendar.add(new Appointment(plan[i].name()));
+            }
         }
 
         return calendar;

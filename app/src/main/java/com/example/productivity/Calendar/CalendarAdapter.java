@@ -16,6 +16,9 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
     private List<Appointment> calendar;
     private ItemClickListener mClickListener;
 
+    private String[] weekDays = new String[] {"", "Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"};
+    private String[] times = new String[] {"9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30"};
+
     public class CalendarViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView title;
 
@@ -43,12 +46,24 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
 
     @Override
     public void onBindViewHolder(CalendarViewHolder holder, int position) {
-        holder.title.setText(calendar.get(position).getName());
+        if (position < 8) {
+            holder.title.setText(weekDays[position]);
+        } else if (position%8 == 0) {
+            holder.title.setText(times[position/8 -1]);
+        } else {
+            int index = (position-8)/8 * 7 + position%8 -1;
+            if (index < calendar.size()) {
+                holder.title.setText(calendar.get(index).getName());
+            } else {
+                System.out.println(index + position + "********************************************************");
+            }
+
+        }
     }
 
     @Override
     public int getItemCount() {
-        return calendar.size();
+        return (int) Math.ceil(calendar.size()/7.0)*8+8;
     }
 
     void setClickListener(CalendarAdapter.ItemClickListener itemClickListener) {
