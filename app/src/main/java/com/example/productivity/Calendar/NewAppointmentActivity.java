@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
@@ -14,31 +13,32 @@ import android.widget.EditText;
 
 import com.example.productivity.R;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.SimpleTimeZone;
+
 public class NewAppointmentActivity extends AppCompatActivity {
 
-    private Button date, time;
+    private Button dateButton, timeButton;
     private EditText name;
-    private int mYear, mMonth, mDay, mHour, mMinute;
+    private Calendar date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar_new_appointment);
 
-        date = findViewById(R.id.date);
-        time = findViewById(R.id.time);
+        dateButton = findViewById(R.id.date);
+        timeButton = findViewById(R.id.time);
         name = findViewById(R.id.name);
 
-        mYear = 2020;
-        mMonth = 0;
-        mDay = 8;
+        date = GregorianCalendar.getInstance();
 
-        mHour = 12;
-        mMinute = 0;
+        dateButton.setText(new SimpleDateFormat("dd.MM.yyyy").format(date.getTime()));
 
-        date.setText(mDay + "." + mMonth + 1 + "." + mYear);
-
-        time.setText(mHour + ":" + mMinute);
+        timeButton.setText(new SimpleDateFormat("HH:mm").format(date.getTime()));
     }
 
     public void onClick(View view) {
@@ -51,13 +51,13 @@ public class NewAppointmentActivity extends AppCompatActivity {
                         public void onDateSet(DatePicker view, int year,
                                               int monthOfYear, int dayOfMonth) {
 
-                            mYear = year;
-                            mMonth = monthOfYear;
-                            mDay = dayOfMonth;
+                            date.set(Calendar.YEAR, year);
+                            date.set(Calendar.MONTH, monthOfYear);
+                            date.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-                            date.setText(mDay + "." + mMonth + 1 + "." + mYear);
+                            dateButton.setText(new SimpleDateFormat("dd.MM.yyyy").format(date.getTime()));
                         }
-                    }, mYear, mMonth, mDay);
+                    }, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH));
             datePickerDialog.show();
         }
         if (view.getId() == R.id.time) {
@@ -68,17 +68,17 @@ public class NewAppointmentActivity extends AppCompatActivity {
                         public void onTimeSet(TimePicker view, int hourOfDay,
                                               int minute) {
 
-                            mHour = hourOfDay;
-                            mMinute = minute;
+                            date.set(Calendar.HOUR, hourOfDay);
+                            date.set(Calendar.MINUTE, minute);
 
-                            time.setText(mHour + ":" + mMinute);
+                            timeButton.setText(new SimpleDateFormat("HH:mm").format(date.getTime()));
                         }
-                    }, mHour, mMinute, false);
+                    }, date.get(Calendar.HOUR), date.get(Calendar.MINUTE), true);
             timePickerDialog.show();
         }
 
         if (view.getId() == R.id.done) {
-            Appointment appointment = new Appointment(name.getText().toString(), mYear, mMonth, mDay, mHour, mMinute, AppointmentCategory.Other);
+            Appointment appointment = new Appointment(name.getText().toString(), date, AppointmentCategory.Other);
             CalendarActivity.calendarManager.addAppointment(appointment);
             finish();
         }

@@ -48,14 +48,17 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
     public void onBindViewHolder(CalendarViewHolder holder, int position) {
         if (position < 8) {
             holder.title.setText(weekDays[position]);
+            holder.title.setBackgroundResource(R.color.lighterBackground);
         } else if (position%8 == 0) {
             holder.title.setText(times[position/8 -1]);
+            holder.title.setBackgroundResource(R.color.lighterBackground);
         } else {
             int index = (position-8)/8 * 7 + position%8 -1;
             if (index < calendar.size()) {
                 holder.title.setText(calendar.get(index).getName());
+                holder.title.setBackgroundResource(calendar.get(index).getCategory().getColor());
             } else {
-                System.out.println(index + position + "********************************************************");
+                System.out.println(index + position + "******************************************************** appointment out of bounds");
             }
 
         }

@@ -15,16 +15,16 @@ public class Appointment implements Serializable {
     private static final long serialVersionUID = -3825880683075034385L;
     private AppointmentCategory category;
 
-    Appointment(String name) {
+    Appointment(String name, AppointmentCategory category) {
         this.name = name;
-        this.category = AppointmentCategory.Other;
+        this.category = category;
         date = GregorianCalendar.getInstance();
     }
 
-    Appointment(String name, int year, int month, int day, int hour, int minute, AppointmentCategory category) {
+    Appointment(String name, Calendar date, AppointmentCategory category) {
         this.name = name;
         this.category = category;
-        date = new GregorianCalendar(year, month, day, hour, minute);
+        this.date = date;
 
     }
 
@@ -54,12 +54,12 @@ enum AppointmentCategory {
 
     static {
         Sport.color = R.color.darkBlue;
-        Work.color = R.color.darkBlue;
-        Masterarbeit.color = R.color.darkBlue;
-        Hobby.color = R.color.darkBlue;
-        Other.color = R.color.darkBlue;
-        Essen.color = R.color.darkBlue;
-        Cookie.color = R.color.darkBlue;
+        Work.color = R.color.darkBackground;
+        Masterarbeit.color = R.color.darkRed;
+        Hobby.color = R.color.darkGreen;
+        Other.color = R.color.lighterBackground;
+        Essen.color = R.color.darkYellow;
+        Cookie.color = R.color.darkGreen;
     }
 
     public int getColor() {

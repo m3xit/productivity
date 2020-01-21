@@ -3,15 +3,19 @@ package com.example.productivity.Calendar;
 import com.example.productivity.MainActivity;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class CalendarManager {
 
     private List<Appointment> appointments;
+    private Calendar date;
     private final String appointmentKey = "com.example.productivity.CalendarActivity.appointmentKey";
 
     public CalendarManager() {
         readAppointments();
+        date = GregorianCalendar.getInstance();
     }
 
     public List<Appointment> getAppointments() {
@@ -39,7 +43,7 @@ public class CalendarManager {
 
         for (int i = 0; i < 30; i++) {
             for (int j = 0; j < 7; j++) {
-                calendar.add(new Appointment(plan[i].name()));
+                calendar.add(new Appointment(plan[i].name(), plan[i]));
             }
         }
 
