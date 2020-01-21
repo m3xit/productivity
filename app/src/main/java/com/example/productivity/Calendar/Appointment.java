@@ -1,42 +1,31 @@
 package com.example.productivity.Calendar;
 
-import android.graphics.Color;
-
 import com.example.productivity.R;
 
 import java.io.Serializable;
+import java.text.DateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
+import java.util.GregorianCalendar;
 
 public class Appointment implements Serializable {
 
     private String name;
-    private int mYear, mMonth, mDay, mHour, mMinute;
+    private Calendar date;
+    //private int mYear, mMonth, mDay, mHour, mMinute;
     private static final long serialVersionUID = -3825880683075034385L;
     private AppointmentCategory category;
 
     Appointment(String name) {
-        Date date = new Date();
-        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Paris"));
-        cal.setTime(date);
         this.name = name;
-        this.mYear = cal.get(Calendar.YEAR);
-        this.mMonth = cal.get(Calendar.MONTH);
-        this.mDay = cal.get(Calendar.DAY_OF_MONTH);
-        this.mHour = cal.getTime().getHours();
-        this.mMinute = cal.getTime().getMinutes();
         this.category = AppointmentCategory.Other;
+        date = GregorianCalendar.getInstance();
     }
 
-    Appointment(String name, int mYear, int mMonth, int mDay, int mHour, int mMinute, AppointmentCategory category) {
+    Appointment(String name, int year, int month, int day, int hour, int minute, AppointmentCategory category) {
         this.name = name;
-        this.mMinute = mMinute;
-        this.mHour = mHour;
-        this.mDay = mDay;
-        this.mMonth = mMonth;
-        this.mYear = mYear;
         this.category = category;
+        date = new GregorianCalendar(year, month, day, hour, minute);
+
     }
 
     public AppointmentCategory getCategory() {
@@ -48,7 +37,7 @@ public class Appointment implements Serializable {
     }
 
     String getDate() {
-        return String.format("%02d.%02d.%02d %02d:%02d", mDay, mMonth + 1, mYear, mHour, mMinute);
+        return DateFormat.getDateInstance().format(date.getTime());
     }
 }
 
