@@ -66,7 +66,7 @@ public class CalendarActivity extends AppCompatActivity implements AppointmentAd
         calendarView = findViewById(R.id.calendar);
         calendarView.setHasFixedSize(true);
 
-        calendarAdapter = new CalendarAdapter(calendarManager.createPlan());
+        calendarAdapter = new CalendarAdapter(calendarManager.getPlan());
         calendarAdapter.setClickListener(this);
         calendarView.setLayoutManager(new GridLayoutManager(this, 8));
         calendarView.addItemDecoration(new GridSpacingItemDecoration(8, 2, false));
