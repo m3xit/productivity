@@ -1,8 +1,13 @@
 package com.example.productivity.Calendar;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -11,6 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.productivity.R;
 import com.example.productivity.stuff.GridSpacingItemDecoration;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class CalendarActivity extends AppCompatActivity implements AppointmentAdapter.ItemClickListener, CalendarAdapter.ItemClickListener {
 
@@ -29,6 +37,24 @@ public class CalendarActivity extends AppCompatActivity implements AppointmentAd
         calendarManager = new CalendarManager();
 
         initializeAdapters();
+
+        goodMorningGreeting();
+    }
+
+    private void goodMorningGreeting() {
+        if (calendarManager.firstTimeToday()) {
+            final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
+            LayoutInflater inflater = this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.fragment_calendar_greeting, null);
+
+            final TextView greetingText = dialogView.findViewById(R.id.greetingText);
+            greetingText.setText("Good morning, today is " + calendarManager.getDayOfWeek() + "\nYou have " + calendarManager.getAppointmentsTodayCount() + " Appointments.");
+
+            dialogBuilder.setView(dialogView);
+            dialogBuilder.setPositiveButton("Thanks", null);
+
+            dialogBuilder.create().show();
+        }
     }
 
     @Override

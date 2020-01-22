@@ -11,7 +11,6 @@ public class Appointment implements Serializable {
 
     private String name;
     private Calendar date;
-    //private int mYear, mMonth, mDay, mHour, mMinute;
     private static final long serialVersionUID = -3825880683075034385L;
     private AppointmentCategory category;
 
@@ -26,6 +25,26 @@ public class Appointment implements Serializable {
         this.category = category;
         this.date = date;
 
+    }
+
+    int getDayOfWeek() {
+        return  date.get(Calendar.DAY_OF_WEEK);
+    }
+
+    int getDayOfYear() {
+        return  date.get(Calendar.DAY_OF_YEAR);
+    }
+
+    int getYear() {
+        return  date.get(Calendar.YEAR);
+    }
+
+    int getHour() {
+        return date.get(Calendar.HOUR);
+    }
+
+    int getMinute() {
+        return date.get(Calendar.MINUTE);
     }
 
     public AppointmentCategory getCategory() {
@@ -44,22 +63,18 @@ public class Appointment implements Serializable {
 enum AppointmentCategory {
     Sport,
     Work,
-    Masterarbeit,
     Hobby,
-    Other,
     Essen,
-    Cookie;
+    Other;
 
     private int color;
 
     static {
-        Sport.color = R.color.darkBlue;
-        Work.color = R.color.darkBackground;
-        Masterarbeit.color = R.color.darkRed;
-        Hobby.color = R.color.darkGreen;
-        Other.color = R.color.lighterBackground;
-        Essen.color = R.color.darkYellow;
-        Cookie.color = R.color.darkGreen;
+        Sport.color = R.color.calendarSport;
+        Work.color = R.color.calendarWork;
+        Hobby.color = R.color.calendarHobby;
+        Essen.color = R.color.calendarEssen;
+        Other.color = R.color.calendarOther;
     }
 
     public int getColor() {
