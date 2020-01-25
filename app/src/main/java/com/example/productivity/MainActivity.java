@@ -13,10 +13,10 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.productivity.calendar.CalendarActivity;
-import com.example.productivity.notes.NotesActivity;
-import com.example.productivity.timer.TimerActivity;
-import com.example.productivity.training.TrainingListActivity;
+import com.example.productivity.Calendar.CalendarActivity;
+import com.example.productivity.Notes.NotesActivity;
+import com.example.productivity.Timer.TimerActivity;
+import com.example.productivity.Training.TrainingListActivity;
 import com.example.productivity.stuff.SaveData;
 
 public class MainActivity extends AppCompatActivity {
