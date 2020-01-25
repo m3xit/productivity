@@ -15,32 +15,32 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".Training.EditTrainingActivity"
-            android:parentActivityName=".Training.TrainingListActivity"/>
+            android:name=".training.EditTrainingActivity"
+            android:parentActivityName=".training.TrainingListActivity"/>
         <activity
-            android:name=".Notes.EditNoteActivity"
-            android:parentActivityName=".Notes.NotesActivity"/>
+            android:name=".notes.EditNoteActivity"
+            android:parentActivityName=".notes.NotesActivity"/>
         <activity
-            android:name=".Calendar.NewAppointmentActivity"
-            android:parentActivityName=".Calendar.CalendarActivity"/>
+            android:name=".calendar.NewAppointmentActivity"
+            android:parentActivityName=".calendar.CalendarActivity"/>
         <activity
-            android:name=".Timer.TimerActivity"
+            android:name=".timer.TimerActivity"
             android:parentActivityName=".MainActivity"/>
         <activity
-            android:name=".Training.TrainingDetailsActivity"
-            android:parentActivityName=".Training.TrainingListActivity"/>
+            android:name=".training.TrainingDetailsActivity"
+            android:parentActivityName=".training.TrainingListActivity"/>
         <activity
-            android:name=".Training.NewTrainingActivity"
-            android:parentActivityName=".Training.TrainingListActivity"
+            android:name=".training.NewTrainingActivity"
+            android:parentActivityName=".training.TrainingListActivity"
             android:noHistory="true"/>
         <activity
-            android:name=".Training.TrainingListActivity"
+            android:name=".training.TrainingListActivity"
             android:parentActivityName=".MainActivity"/>
         <activity
-            android:name=".Calendar.CalendarActivity"
+            android:name=".calendar.CalendarActivity"
             android:parentActivityName=".MainActivity"/>
         <activity
-            android:name=".Notes.NotesActivity"
+            android:name=".notes.NotesActivity"
             android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".MainActivity">
