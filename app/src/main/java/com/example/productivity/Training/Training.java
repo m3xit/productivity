@@ -65,9 +65,10 @@ public class Training implements Serializable {
         return null;
     }
 
-    void addExercise(Exercise e) {
+    void addExercise(String name) {
+        name = name.trim();
         if (!name.equals("")) {
-            exercises.add(e);
+            exercises.add(new Exercise(name, ""));
         }
     }
 

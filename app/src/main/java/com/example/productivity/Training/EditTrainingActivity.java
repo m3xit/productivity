@@ -103,6 +103,7 @@ public class EditTrainingActivity extends AppCompatActivity implements EditExerc
         View dialogView = inflater.inflate(R.layout.fragment_edit_text, null);
 
         final EditText editText = dialogView.findViewById(R.id.text);
+        editText.requestFocus();
 
         dialogBuilder.setView(dialogView);
         dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -124,6 +125,7 @@ public class EditTrainingActivity extends AppCompatActivity implements EditExerc
         View dialogView = inflater.inflate(R.layout.fragment_edit_text, null);
 
         final EditText editText = dialogView.findViewById(R.id.text);
+        editText.requestFocus();
 
         dialogBuilder.setView(dialogView);
         dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -168,7 +170,7 @@ public class EditTrainingActivity extends AppCompatActivity implements EditExerc
     }
 
     private void addExercise(String name) {
-        training.addExercise(new Exercise(name, ""));
+        training.addExercise(name);
     }
 
     @Override

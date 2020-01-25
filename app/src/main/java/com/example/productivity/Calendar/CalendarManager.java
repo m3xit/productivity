@@ -68,7 +68,7 @@ class CalendarManager {
         return first;
     }
 
-    public String getDayOfWeek() {
+    String getDayOfWeek() {
         return date.getDisplayName( Calendar.DAY_OF_WEEK ,Calendar.LONG, Locale.US);
     }
 
