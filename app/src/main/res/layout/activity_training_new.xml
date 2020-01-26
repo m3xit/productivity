@@ -83,7 +83,7 @@
             android:gravity="center"
             android:maxLines="1"
             android:hint="@string/training_title"
-            android:inputType="textCapSentences"/>
+            android:inputType="textCapSentences|textMultiLine"/>
 
         <Button
             android:id="@+id/start_training"
