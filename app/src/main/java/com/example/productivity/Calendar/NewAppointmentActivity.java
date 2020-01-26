@@ -1,23 +1,21 @@
 package com.example.productivity.Calendar;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.DatePicker;
-import android.widget.TimePicker;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.productivity.R;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.SimpleTimeZone;
 
 public class NewAppointmentActivity extends AppCompatActivity {
 
@@ -65,15 +63,15 @@ public class NewAppointmentActivity extends AppCompatActivity {
                     new TimePickerDialog.OnTimeSetListener() {
 
                         @Override
-                        public void onTimeSet(TimePicker view, int hourOfDay,
+                        public void onTimeSet(TimePicker view, int HOUR_OF_DAYOfDay,
                                               int minute) {
 
-                            date.set(Calendar.HOUR, hourOfDay);
+                            date.set(Calendar.HOUR_OF_DAY, HOUR_OF_DAYOfDay);
                             date.set(Calendar.MINUTE, minute);
 
                             timeButton.setText(new SimpleDateFormat("HH:mm").format(date.getTime()));
                         }
-                    }, date.get(Calendar.HOUR), date.get(Calendar.MINUTE), true);
+                    }, date.get(Calendar.HOUR_OF_DAY), date.get(Calendar.MINUTE), true);
             timePickerDialog.show();
         }
 

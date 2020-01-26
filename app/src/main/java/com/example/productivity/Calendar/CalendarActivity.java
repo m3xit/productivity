@@ -1,12 +1,10 @@
 package com.example.productivity.Calendar;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,9 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.productivity.R;
 import com.example.productivity.stuff.GridSpacingItemDecoration;
-
-import java.util.Calendar;
-import java.util.Date;
 
 public class CalendarActivity extends AppCompatActivity implements AppointmentAdapter.ItemClickListener, CalendarAdapter.ItemClickListener {
 
@@ -71,6 +66,7 @@ public class CalendarActivity extends AppCompatActivity implements AppointmentAd
     public void onItemClick(View view, int position) {
         if (view.getId() == R.id.appointment) {
             calendarManager.removeAppointment(position);
+            //todo adapter.setCalendar(calendarManager.getAppointments());
             adapter.notifyDataSetChanged();
         }
     }

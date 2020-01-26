@@ -7,7 +7,7 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Appointment implements Serializable {
+public class Appointment implements Serializable, Comparable<Appointment> {
 
     private String name;
     private Calendar date;
@@ -57,6 +57,15 @@ public class Appointment implements Serializable {
 
     String getDate() {
         return DateFormat.getDateInstance().format(date.getTime());
+    }
+
+    @Override
+    public int compareTo(Appointment appointment) {
+        return getDate().compareTo(appointment.getDate());
+    }
+
+    public Calendar getCalendar() {
+        return date;
     }
 }
 

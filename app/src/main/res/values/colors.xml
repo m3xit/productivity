@@ -10,9 +10,9 @@
     <color name="darkBlue">#356986</color>
     <color name="darkRed">#8E3D41</color>
     <color name="calendarSport">#3991FD</color>
-    <color name="calendarWork">#ff6f69</color>
+    <color name="calendarWork">#ffcc5c</color>
     <color name="calendarHobby">#FFFF00</color>
     <color name="calendarEssen">#54E29C</color>
-    <color name="calendarOther">#ffcc5c</color>
+    <color name="calendarOther">#ff6f69</color>
     <color name="calendar5">#96CEC3</color>
 </resources>

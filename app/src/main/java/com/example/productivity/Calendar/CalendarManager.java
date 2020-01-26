@@ -4,6 +4,7 @@ import com.example.productivity.MainActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
@@ -12,6 +13,7 @@ class CalendarManager {
 
     private List<Appointment> appointments;
     private Appointment[][] calendar;
+    private Appointment[][] defaultCalendar;
     private Calendar date;
     private final String appointmentKey = "com.example.productivity.CalendarActivity.appointmentKey";
     private final String todayKey = "com.example.productivity.CalendarActivity.todayKey";
@@ -20,6 +22,13 @@ class CalendarManager {
         date = GregorianCalendar.getInstance();
         readAppointments();
         createPlan();
+        createCalendar();
+    }
+
+    private void createCalendar() {
+        calendar = defaultCalendar;
+
+        insertAppointments();
     }
 
     List<Appointment> getAppointments() {
@@ -48,12 +57,15 @@ class CalendarManager {
 
     void addAppointment(int index, Appointment appointment) {
         appointments.add(index, appointment);
+        Collections.sort(appointments);
         writeAppointments();
+        createCalendar();
     }
 
     void removeAppointment(int index) {
         appointments.remove(index);
         writeAppointments();
+        createCalendar();
     }
 
     boolean firstTimeToday() {
@@ -69,7 +81,7 @@ class CalendarManager {
     }
 
     String getDayOfWeek() {
-        return date.getDisplayName( Calendar.DAY_OF_WEEK ,Calendar.LONG, Locale.US);
+        return date.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.US);
     }
 
     boolean sameDayOfWeek(Appointment appointment) {
@@ -86,15 +98,68 @@ class CalendarManager {
     }
 
     private void createPlan() {
-        calendar = new Appointment[7][30];
+        defaultCalendar = new Appointment[7][30];
 
-        calendar[0] = createDay(Calendar.MONDAY);
-        calendar[1] = createDay(Calendar.TUESDAY);
-        calendar[2] = createDay(Calendar.WEDNESDAY);
-        calendar[3] = createDay(Calendar.THURSDAY);
-        calendar[4] = createDay(Calendar.FRIDAY);
-        calendar[5] = createDay(Calendar.SATURDAY);
-        calendar[6] = createDay(Calendar.SUNDAY);
+        defaultCalendar[0] = createDay(Calendar.MONDAY);
+        defaultCalendar[1] = createDay(Calendar.TUESDAY);
+        defaultCalendar[2] = createDay(Calendar.WEDNESDAY);
+        defaultCalendar[3] = createDay(Calendar.THURSDAY);
+        defaultCalendar[4] = createDay(Calendar.FRIDAY);
+        defaultCalendar[5] = createDay(Calendar.SATURDAY);
+        defaultCalendar[6] = createDay(Calendar.SUNDAY);
+    }
+
+    private void insertAppointments() {
+        for (Appointment a : appointments) {
+            int day = inWeek(a);
+            if (day >= 0) {
+                int index = (a.getCalendar().get(Calendar.HOUR) + (a.getCalendar().get(Calendar.AM_PM) * 12) - 9) * 2 + (a.getCalendar().get(Calendar.MINUTE) / 30);
+                if (index < 0) {
+                    index = 0;
+                } else if (index >= calendar[day].length) {
+                    index = calendar[day].length - 1;
+                }
+
+                calendar[day][index] = a;
+                System.out.println(a.getName() + "*****************************************************");
+            }
+        }
+    }
+
+    private int inWeek(Appointment appointment) {
+        Calendar date = Calendar.getInstance();
+
+        for (int i = 0; i < 7; i++) {
+            switch (i) {
+                case 0:
+                    date.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+                    break;
+                case 1:
+                    date.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
+                    break;
+                case 2:
+                    date.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
+                    break;
+                case 3:
+                    date.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
+                    break;
+                case 4:
+                    date.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
+                    break;
+                case 5:
+                    date.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+                    break;
+                case 6:
+                    date.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+                    break;
+            }
+
+            if (appointment.getCalendar().get(Calendar.DAY_OF_YEAR) == date.get(Calendar.DAY_OF_YEAR) && appointment.getCalendar().get(Calendar.YEAR) == date.get(Calendar.YEAR)) {
+                return i;
+            }
+        }
+
+        return -1;
     }
 
     private void writeAppointments() {
@@ -107,6 +172,8 @@ class CalendarManager {
         if (appointments == null) {
             appointments = new ArrayList<>();
         }
+
+        Collections.sort(appointments);
     }
 
     private Appointment[] createDay(int dayOfWeek) {

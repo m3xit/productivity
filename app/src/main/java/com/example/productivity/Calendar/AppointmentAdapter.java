@@ -12,7 +12,7 @@ import com.example.productivity.R;
 import java.util.List;
 
 public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.AppointmentViewHolder> {
-    private List<Appointment> appointments;
+    private List<Appointment> calendar;
     private AppointmentAdapter.ItemClickListener clickListener;
 
     public class AppointmentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -32,8 +32,8 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         }
     }
 
-    public AppointmentAdapter(List<Appointment> appointments) {
-        this.appointments = appointments;
+    public AppointmentAdapter(List<Appointment> calendar) {
+        this.calendar = calendar;
     }
 
     @Override
@@ -45,18 +45,22 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
 
     @Override
     public void onBindViewHolder(AppointmentViewHolder holder, int position) {
-        holder.name.setText(appointments.get(position).getName());
-        holder.date.setText(appointments.get(position).getDate());
+        holder.name.setText(calendar.get(position).getName());
+        holder.date.setText(calendar.get(position).getDate());
 
     }
 
     @Override
     public int getItemCount() {
-        return appointments.size();
+        return calendar.size();
     }
 
     void setClickListener(AppointmentAdapter.ItemClickListener clickListener) {
         this.clickListener = clickListener;
+    }
+
+    void setCalendar(List<Appointment> calendar) {
+        this.calendar = calendar;
     }
 
     public interface ItemClickListener {
